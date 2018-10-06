@@ -43,8 +43,11 @@ void move_character(dungeon_t *d, character_t *c, pair_t next)
   }
 }
 
-void do_moves(dungeon_t *d)
+void do_moves(dungeon_t *d, int dir)
 {
+  if(dir == '\0' || dir == 'q'){
+    return;
+  }
   pair_t next;
   character_t *c;
   event_t *e;
@@ -103,13 +106,18 @@ void do_moves(dungeon_t *d)
      * and recreated every time we leave and re-enter this function.    */
     e->c = NULL;
     event_delete(e);
-    pc_next_pos(d, next);
-    next[dim_x] += c->position[dim_x];
-    next[dim_y] += c->position[dim_y];
-    if (mappair(next) <= ter_floor) {
-      mappair(next) = ter_floor_hall;
-    }
-    move_character(d, c, next);
+    //pc_next_pos(d, next);
+    //next[dim_x] += c->position[dim_x];
+    //next[dim_y] += c->position[dim_y];
+    //if (mappair(next) <= ter_floor) {
+    //mappair(next) = ter_floor_hall;
+    //}
+    
+    //This method moves the character randomly 
+    //move_character(d, c, next);
+
+    //Moves the PC according to the keypresses
+    move_pc(d, c, dir);
 
     dijkstra(d);
     dijkstra_tunnel(d);
@@ -158,7 +166,60 @@ uint32_t in_corner(dungeon_t *d, character_t *c)
   return num_immutable > 1;
 }
 
-uint32_t move_pc(dungeon_t *d, uint32_t dir)
+uint32_t move_pc(dungeon_t *d, character_t *c, int dir)
 {
+  pair_t next;
+
+  switch (dir)
+    {
+    case 'y' :
+      next[dim_y] = d->pc.position[dim_y] -1;
+      next[dim_x] = d->pc.position[dim_x] -1;
+      break;
+    case 'k' :
+      next[dim_y] = d->pc.position[dim_y] -1;
+      next[dim_x] = d->pc.position[dim_x];
+      break;
+    case 'u' :
+      next[dim_y] = d->pc.position[dim_y] -1;
+      next[dim_x] = d->pc.position[dim_x] +1;
+      break;
+    case 'l' :
+      next[dim_y] = d->pc.position[dim_y];
+      next[dim_x] = d->pc.position[dim_x] +1;
+      break;
+    case 'n' :
+      next[dim_y] = d->pc.position[dim_y] +1;
+      next[dim_x] = d->pc.position[dim_x] +1;
+      break;
+    case 'j' :
+      next[dim_y] = d->pc.position[dim_y] +1;
+      next[dim_x] = d->pc.position[dim_x];
+      break;
+    case 'b' :
+      next[dim_y] = d->pc.position[dim_y] +1;
+      next[dim_x] = d->pc.position[dim_x] -1;
+      break;
+    case 'h' :
+      next[dim_y] = d->pc.position[dim_y];
+      next[dim_x] = d->pc.position[dim_x] -1;
+      break;
+    case 32 :
+      next[dim_y] = d->pc.position[dim_y];
+      next[dim_x] = d->pc.position[dim_x];
+      break;
+    }
+
+  //Checks to see if the character is about to pass through a room
+  if(mappair(next) != ter_floor_hall && mappair(next) != ter_floor_room)
+    {
+      next[dim_y] = d->pc.position[dim_y];
+      next[dim_x] = d->pc.position[dim_x]; 
+    }
+  d->character[c->position[dim_y]][c->position[dim_x]] = NULL;
+  c->position[dim_y] = next[dim_y];
+  c->position[dim_x] = next[dim_x];
+  d->character[c->position[dim_y]][c->position[dim_x]] = c;
+  
   return 1;
 }

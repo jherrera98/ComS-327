@@ -224,10 +224,10 @@ move.c,194
 void do_combat(17,250
 void move_character(30,571
 void do_moves(46,1052
-void dir_nearest_wall(119,3268
-uint32_t against_wall(131,3683
-uint32_t in_corner(143,4171
-uint32_t move_pc(161,4799
+void dir_nearest_wall(127,3463
+uint32_t against_wall(139,3878
+uint32_t in_corner(151,4366
+uint32_t move_pc(169,4994
 
 move.h,104
 # define MOVE_H2,15

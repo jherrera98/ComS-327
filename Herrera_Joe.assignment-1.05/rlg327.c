@@ -222,12 +222,14 @@ int main(int argc, char *argv[])
   noecho();
   refresh();
   
-  int c = 0;
+  int c = NULL;
 
   while (pc_is_alive(&d) && dungeon_has_npcs(&d) && c != 'q') {
     render_dungeon(&d);
-    do_moves(&d);
+
     c = getch();
+    //pass in the keypress
+    do_moves(&d, c);
   }
   
   endwin();
