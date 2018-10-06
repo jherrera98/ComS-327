@@ -1,0 +1,10 @@
+9/1 4:30pm: Started Project
+9/1 5:00pm: Made the Makefile and main.c
+9/1 6:00pm: Implemented printing of the dungeon's border
+9/1 10:30pm:Set each cell's variables (immutable, character, hardness)
+9/1 11:30pm:Redid the generation of the dungeon
+9/2 12:30am:Made it possible to pass in a seed value in the arguments
+9/3 11:30am:Now able to print one room, need to fix rooms printing out of boundaries
+9/3 12:30pm:Prints out multiple rooms but some overlap
+9/3 4:30pm :Random number of rooms (5-10) print to console without overlaps
+9/4 3:20pm :Print out the rooms with the corridors

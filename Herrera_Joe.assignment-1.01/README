@@ -1,0 +1,5 @@
+ Assignment 1.01: Dungeon Generation 
+Includes: main.c, MakeFile, and CHANGELOG
+Description: A program that prints out a randomly generated dungeon with at least five rooms
+	     to the terminal. The rooms are all connected by corridors which makes it possible
+	     to reach any room from any starting room.

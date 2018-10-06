@@ -1,0 +1,12 @@
+9/29 3:30pm:Started Project
+9/29 7:00pm:Program can now take in a switch for nummom
+9/29 8:15pm:Prints out the monsters randomly in the rooms (not in the same room as PC)
+9/29 1:00pm:Character randomly moves around the dungeon
+9/29 6:30pm:Monsters now move randomly too
+9/29 7:00pm:Fixed a bug where the dungeon would shift over at times
+9/30 12:00pm:Working on characteristics
+9/30 5:00pm:Still working on characteristics
+10/1 9:00pm:STILL working on characteristics
+10/2 1:00pm:Got most characteristics to work, still need to implement line of sight and monsters dying on impact
+10/2 1:30pm:Characteristics WORK, finally. Need to implement monsters killing other monsters
+10/2 3:00pm:All Characteristics are implemented and monsters kill eachother. Project is now complete

@@ -1,0 +1,6 @@
+Assignment 1.04: Player Charcter and Monsters
+Includes: rlg327.c, images, test_dungeon_files, dims.h, dungeon.c/h, heap.c/h, macros.h, path.c/h, utils.c/h, MakeFile, and CHANGELOG
+Description: Built off of Jeremy Sheaffer's code from assignment 1.03. This program randomly places monsters around the dungeon. A player is randomly generated and moves
+	     around randomly. The monsters move based on their characteristics that have been fully implemented. Monster's line of sight is based off a radius of 5 if the 
+	     player is in view. Monsters will kill other monsters based on which monster arrived to the cell first, new arrival kills old monster. The game will end when either
+	     a monster moves on top of the player, vise versa. "Winning" occurs when the player kills a monster, "Losing" occurs when a monster kills the player

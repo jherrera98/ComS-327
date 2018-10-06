@@ -1,0 +1,5 @@
+Assignment 1.03: Pathing Finding
+Includes: rlg327.c, heap.c, MakeFile, and CHANGELOG
+Description: Built off of the Jeremy Sheaffer's code from 1.02. The program will place the character of the player randomly in
+	     the dungeon and print out this map. Then it will print out the distance map for the monster's that can't tunnel 
+	     through the walls. Finally, it will print out the distance map for the monster's that can tunnel through the walls.

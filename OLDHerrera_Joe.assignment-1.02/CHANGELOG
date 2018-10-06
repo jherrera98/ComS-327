@@ -1,0 +1,11 @@
+9/9 1:00 pm: Started Project
+9/9 6:00 pm: Program recongnizes arguments such as save and load, still need to implement
+	     the functionality of these arguments
+9/9 7:30 pm: Able use fopen to open a file
+9/9 9:00 pm: Now reads the file type marker "RLG327-F2018"
+9/10 3:00pm: Able to pull the Dungeon Hardness values from the little endian files
+9/10 6:00pm: Able to pull ALL the Dungeon Values from the little endian files
+9/11 5:30pm: Prints out just the rooms without corridors
+9/11 11:00pm:Loads in files
+9/12 10:00am:Saves files
+9/12 12:30pm:Loads and saves files, Project completed

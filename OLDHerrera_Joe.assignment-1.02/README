@@ -1,0 +1,5 @@
+ Assignment 1.02: Dungeon Load/Save
+Includes: main.c, MakeFile, and CHANGELOG
+Description: Built off of the professor's code for 1.01. The program will load in big endian
+	     files and print them out to the console. The program can also save the current 
+	     dungeon and do both load and save at the same time.
