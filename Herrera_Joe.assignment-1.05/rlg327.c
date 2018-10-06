@@ -64,6 +64,11 @@ const char *tombstone =
   "..\"\"\"\"\"....\"\"\"\"\"..\"\"...\"\"\".\n\n"
   "            You're dead.  Better luck in the next life.\n\n\n";
 
+void resetDungeon(dungeon_t *d);
+
+void generateStairs(dungeon_t *d);
+
+
 void usage(char *name)
 {
   fprintf(stderr,
@@ -216,6 +221,7 @@ int main(int argc, char *argv[])
   /* Ignoring PC position in saved dungeons.  Not a bug. */
   config_pc(&d);
   gen_monsters(&d);
+  generateStairs(&d);
 
   //Init ncurses
   initscr();
@@ -228,8 +234,21 @@ int main(int argc, char *argv[])
     render_dungeon(&d);
 
     c = getch();
-    //pass in the keypress
-    do_moves(&d, c);
+
+    //Checks if the PC is on top of a stair 
+    if((d.map[d.pc.position[dim_y]][d.pc.position[dim_x]] == ter_up_stairs && c == '<') ||
+       (d.map[d.pc.position[dim_y]][d.pc.position[dim_x]] == ter_down_stairs && c == '>'))
+      {
+	resetDungeon(&d);
+      }
+    else{
+      //pass in the keypress
+      do_moves(&d, c);
+    }
+    // if(c == 'g'){
+    //resetDungeon(&d);
+    //}
+
   }
   
   endwin();
@@ -271,4 +290,31 @@ int main(int argc, char *argv[])
   delete_dungeon(&d);
 
   return 0;
+}
+
+//Generates a new dungeon
+void resetDungeon(dungeon_t *d)
+{
+  pc_delete(d->pc.pc);
+  delete_dungeon(d);
+  init_dungeon(d);
+  gen_dungeon(d);
+  config_pc(d);
+  gen_monsters(d);
+  generateStairs(d);
+}
+
+void generateStairs(dungeon_t *d)
+{
+  pair_t p;
+
+  //placing the upstairs in the map
+  p[dim_y] = d->rooms[0].position[dim_y];
+  p[dim_x] = d->rooms[0].position[dim_x];
+  d->map[p[dim_y]][p[dim_x]] = ter_up_stairs;
+
+  //placing the downstairs in the map
+  p[dim_y] = d->rooms[1].position[dim_y];
+  p[dim_x] = d->rooms[1].position[dim_x];
+  d->map[p[dim_y]][p[dim_x]] = ter_down_stairs;
 }

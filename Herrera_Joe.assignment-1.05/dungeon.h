@@ -31,11 +31,13 @@
 
 typedef enum __attribute__ ((__packed__)) terrain_type {
   ter_debug,
-  ter_wall,
-  ter_wall_immutable,
-  ter_floor,
-  ter_floor_room,
-  ter_floor_hall,
+    ter_wall,
+    ter_wall_immutable,
+    ter_floor,
+    ter_floor_room,
+    ter_floor_hall,
+    ter_up_stairs,
+    ter_down_stairs
 } terrain_type_t;
 
 typedef struct room {

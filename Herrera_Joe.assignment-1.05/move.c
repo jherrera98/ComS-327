@@ -106,16 +106,7 @@ void do_moves(dungeon_t *d, int dir)
      * and recreated every time we leave and re-enter this function.    */
     e->c = NULL;
     event_delete(e);
-    //pc_next_pos(d, next);
-    //next[dim_x] += c->position[dim_x];
-    //next[dim_y] += c->position[dim_y];
-    //if (mappair(next) <= ter_floor) {
-    //mappair(next) = ter_floor_hall;
-    //}
     
-    //This method moves the character randomly 
-    //move_character(d, c, next);
-
     //Moves the PC according to the keypresses
     move_pc(d, c, dir);
 
@@ -211,7 +202,8 @@ uint32_t move_pc(dungeon_t *d, character_t *c, int dir)
     }
 
   //Checks to see if the character is about to pass through a room
-  if(mappair(next) != ter_floor_hall && mappair(next) != ter_floor_room)
+  if(mappair(next) != ter_floor_hall && mappair(next) != ter_floor_room &&
+     mappair(next) != ter_up_stairs && mappair(next) != ter_down_stairs)
     {
       next[dim_y] = d->pc.position[dim_y];
       next[dim_x] = d->pc.position[dim_x]; 
