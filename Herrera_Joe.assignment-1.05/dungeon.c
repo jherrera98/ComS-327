@@ -5,6 +5,7 @@
 #include <sys/time.h>
 #include <limits.h>
 #include <errno.h>
+#include <ncurses.h>
 
 #include "dungeon.h"
 #include "utils.h"
@@ -585,30 +586,31 @@ void render_dungeon(dungeon_t *d){
   for (p[dim_y] = 0; p[dim_y] < DUNGEON_Y; p[dim_y]++) {
     for (p[dim_x] = 0; p[dim_x] < DUNGEON_X; p[dim_x]++) {
       if (charpair(p)) {
-        putchar(charpair(p)->symbol);
+	char *temp = &(charpair(p)->symbol);
+        mvprintw(p[dim_y],p[dim_x], temp);
       } else {
         switch (mappair(p)) {
         case ter_wall:
         case ter_wall_immutable:
-          putchar(' ');
+          mvprintw(p[dim_y], p[dim_x], " ");
           break;
         case ter_floor:
         case ter_floor_room:
-          putchar('.');
+          mvprintw(p[dim_y], p[dim_x], ".");
           break;
         case ter_floor_hall:
-          putchar('#');
+          mvprintw(p[dim_y], p[dim_x],"#");
           break;
         case ter_debug:
-          putchar('*');
+          mvprintw(p[dim_y], p[dim_x],"*");
           fprintf(stderr, "Debug character at %d, %d\n", p[dim_y], p[dim_x]);
           break;
         }
       }
     }
-    putchar('\n');
+    //putchar('\n');
   }
-  putchar('\n');
+  //putchar('\n');
 }
 
 void delete_dungeon(dungeon_t *d)
