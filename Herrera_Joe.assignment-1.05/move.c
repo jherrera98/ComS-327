@@ -172,39 +172,39 @@ uint32_t move_pc(dungeon_t *d, character_t *c, int dir)
 
   switch (dir)
     {
-    case 'y' :
+    case 'y': case '7':
       next[dim_y] = d->pc.position[dim_y] -1;
       next[dim_x] = d->pc.position[dim_x] -1;
       break;
-    case 'k' :
+    case 'k': case '8':
       next[dim_y] = d->pc.position[dim_y] -1;
       next[dim_x] = d->pc.position[dim_x];
       break;
-    case 'u' :
+    case 'u': case '9':
       next[dim_y] = d->pc.position[dim_y] -1;
       next[dim_x] = d->pc.position[dim_x] +1;
       break;
-    case 'l' :
+    case 'l': case '6':
       next[dim_y] = d->pc.position[dim_y];
       next[dim_x] = d->pc.position[dim_x] +1;
       break;
-    case 'n' :
+    case 'n': case '3':
       next[dim_y] = d->pc.position[dim_y] +1;
       next[dim_x] = d->pc.position[dim_x] +1;
       break;
-    case 'j' :
+    case 'j': case '2':
       next[dim_y] = d->pc.position[dim_y] +1;
       next[dim_x] = d->pc.position[dim_x];
       break;
-    case 'b' :
+    case 'b': case '1':
       next[dim_y] = d->pc.position[dim_y] +1;
       next[dim_x] = d->pc.position[dim_x] -1;
       break;
-    case 'h' :
+    case 'h': case '4':
       next[dim_y] = d->pc.position[dim_y];
       next[dim_x] = d->pc.position[dim_x] -1;
       break;
-    case 32 :
+    case 32: case '5':
       next[dim_y] = d->pc.position[dim_y];
       next[dim_x] = d->pc.position[dim_x];
       break;
@@ -216,10 +216,20 @@ uint32_t move_pc(dungeon_t *d, character_t *c, int dir)
       next[dim_y] = d->pc.position[dim_y];
       next[dim_x] = d->pc.position[dim_x]; 
     }
-  d->character[c->position[dim_y]][c->position[dim_x]] = NULL;
-  c->position[dim_y] = next[dim_y];
-  c->position[dim_x] = next[dim_x];
-  d->character[c->position[dim_y]][c->position[dim_x]] = c;
   
+  if (charpair(next) &&
+      ((next[dim_y] != c->position[dim_y]) ||
+       (next[dim_x] != c->position[dim_x]))) {
+    do_combat(d, c, charpair(next));
+  } else {
+    /* No character in new position. */
+
+    d->character[c->position[dim_y]][c->position[dim_x]] = NULL;
+    c->position[dim_y] = next[dim_y];
+    c->position[dim_x] = next[dim_x];
+    d->character[c->position[dim_y]][c->position[dim_x]] = c;
+  }
+
+
   return 1;
 }
