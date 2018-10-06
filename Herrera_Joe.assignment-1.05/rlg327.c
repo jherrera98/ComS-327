@@ -241,14 +241,22 @@ int main(int argc, char *argv[])
       {
 	resetDungeon(&d);
       }
+    else if(c == 'm'){//brings up the monster list
+      while(c != 27 && c != 'q')//breaks out of the while loop when escape is pressed or the q button is pressed
+	{
+	  WINDOW * win = newwin(21, 80, 0, 0);
+	  box(win, 0, 0);
+	  mvwprintw(win, 1, 1, "TEST");
+	  wrefresh(win);
+	  c = getch();
+	}
+      //render_dungeon(&d);
+      endwin();
+    }
     else{
       //pass in the keypress
       do_moves(&d, c);
     }
-    // if(c == 'g'){
-    //resetDungeon(&d);
-    //}
-
   }
   
   endwin();

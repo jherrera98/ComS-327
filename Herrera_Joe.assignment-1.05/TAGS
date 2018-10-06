@@ -343,13 +343,13 @@ typedef struct dungeon dungeon_t;8,70
 typedef struct pc 10,105
 } pc_t;11,125
 
-rlg327.c,173
+rlg327.c,174
 const char *victory victory15,210
 const char *tombstone tombstone46,1781
 void usage(72,2903
 int main(83,3157
-void resetDungeon(296,9695
-void generateStairs(307,9869
+void resetDungeon(304,9987
+void generateStairs(315,10161
 
 utils.c,25
 int makedirectory(9,124
