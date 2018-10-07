@@ -242,8 +242,10 @@ int main(int argc, char *argv[])
 	resetDungeon(&d);
       }
     else if(c == 'm'){//brings up the monster list
+      int index = 0;
       while(c != 27 && c != 'q')//breaks out of the while loop when escape is pressed or the q button is pressed
 	{
+	 
 	  WINDOW * win = newwin(21, 80, 0, 0);
 	  box(win, 0, 0);
 	  
@@ -261,8 +263,25 @@ int main(int argc, char *argv[])
 	    }
 	  }
 
+	  //If number of monsters is greater than 19, scrolling is needed
+	  if(d.num_monsters > 19)
+	    {      
+	      //taking in the input for up and down 
+	      if(c == 'c' && index > 0)
+		{
+		  index--;
+		}
+	  
+	      if(c == 'v' && index + 19 < d.num_monsters) 
+		{
+		  index++; 
+		}
+	    }
+	  
+	  
 	  //Places the information in the correct format
-	  i =0;
+	  i = 0 + (index);
+	  j = 0;
 	  while(i < d.num_monsters){
 	    int xPosition = monsters[i]->position[dim_x];
 	    int yPosition = monsters[i]->position[dim_y];
@@ -272,30 +291,31 @@ int main(int argc, char *argv[])
 	    
 	    //8 different print statements for 4 combinations + 4 for single directions 
 	    if(yPosition<0 && xPosition < 0){// south and east
-	      mvwprintw(win, i+1, 1, "%c: %d South and %d East", monsters[i]->symbol, abs(yPosition), abs(xPosition));
+	      mvwprintw(win, j+1, 1, "%c: %d South and %d East", monsters[i]->symbol, abs(yPosition), abs(xPosition));
 	    }
 	    else if(yPosition<0 && xPosition > 0){// south and west
-	      mvwprintw(win, i+1, 1, "%c: %d South and %d West", monsters[i]->symbol, abs(yPosition), abs(xPosition));
+	      mvwprintw(win, j+1, 1, "%c: %d South and %d West", monsters[i]->symbol, abs(yPosition), abs(xPosition));
 	    }
 	    else if(yPosition>0 && xPosition < 0){// north and east
-	      mvwprintw(win, i+1, 1, "%c: %d North and %d East", monsters[i]->symbol, abs(yPosition), abs(xPosition));
+	      mvwprintw(win, j+1, 1, "%c: %d North and %d East", monsters[i]->symbol, abs(yPosition), abs(xPosition));
 	    }
 	    else if(yPosition>0 && xPosition > 0){// north and west
-	      mvwprintw(win, i+1, 1, "%c: %d North and %d West", monsters[i]->symbol, abs(yPosition), abs(xPosition));
+	      mvwprintw(win, j+1, 1, "%c: %d North and %d West", monsters[i]->symbol, abs(yPosition), abs(xPosition));
 	    }
 	    else if(yPosition<0){// south
-	      mvwprintw(win, i+1, 1, "%c: %d South", monsters[i]->symbol, abs(yPosition));
+	      mvwprintw(win, j+1, 1, "%c: %d South", monsters[i]->symbol, abs(yPosition));
 	    }
 	    else if(yPosition>0){// North
-	      mvwprintw(win, i+1, 1, "%c: %d North", monsters[i]->symbol, abs(yPosition));
+	      mvwprintw(win, j+1, 1, "%c: %d North", monsters[i]->symbol, abs(yPosition));
 	    }
 	    else if(xPosition > 0){// west
-	      mvwprintw(win, i+1, 1, "%c: %d West", monsters[i]->symbol, abs(xPosition));
+	      mvwprintw(win, j+1, 1, "%c: %d West", monsters[i]->symbol, abs(xPosition));
 	    }
 	    else if(xPosition < 0){// east
-	      mvwprintw(win, i+1, 1, "%c: %d East", monsters[i]->symbol, abs(xPosition));
+	      mvwprintw(win, j+1, 1, "%c: %d East", monsters[i]->symbol, abs(xPosition));
 	    }
 	    i++;
+	    j++;
 	  }
 	  
 	  wrefresh(win);

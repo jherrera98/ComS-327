@@ -348,8 +348,8 @@ const char *victory victory15,210
 const char *tombstone tombstone46,1781
 void usage(72,2903
 int main(83,3157
-void resetDungeon(355,12054
-void generateStairs(366,12228
+void resetDungeon(375,12409
+void generateStairs(386,12583
 
 utils.c,25
 int makedirectory(9,124
