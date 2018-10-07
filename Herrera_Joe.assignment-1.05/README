@@ -1,0 +1,9 @@
+Assignment 1.05: User Interface With Ncurses
+Includes: rlg327.c, images, test_dungeon_files, character.c/h, dims.h, dungeon.c/h, event.c/h, heap.c/h, macros.h, move.c/h, npc.c/h, path.c/h, pc.c/h, utils.c/h, MakeFile, and CHANGELOG
+Description: Built off of Jeremy Sheaffer's code from assignment 1.04. This assignment required us to implement an user interface with Ncurses. I have fully implemented all
+	     required functionality for the assignment. The player can be controlled by the user, using the correct commands from the 
+	     instructions. Stairs are generated in the upper left hand corner of rooms 0 and 1. When a player is ontop of one of these stairs,
+	     the user must input the command corresponding to the stair(ex: '>' enter '>', vise versa). Once the correct command is inputted
+	     the player will go up or down the stairs and a new dungeon will be generated with new monsters. The user can also pull up a list of
+	     the monsters which will show the monsters characters along with the direction with units from the player(North, South, East, West).
+	     Scrolling functionality is also implemented with the monster's list. 

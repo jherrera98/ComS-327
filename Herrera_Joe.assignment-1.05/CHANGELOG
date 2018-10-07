@@ -1,0 +1,18 @@
+10/6 10:30am:Started Project
+10/6 12:30pm:Got the map to print out using ncurses
+10/6 4:00pm:Got the pc character to move with respect to rooms and halls
+10/6 4:30pm:Additional PC controls were added and PC can now smite monsters
+10/6 6:00pm:Stairs now generate in the map and the player is able to enter these stairs using the right commands
+10/6 6:40pm:Able to print out a window with the text "TEST"
+10/6 8:10pm:Monster list now works, shows the correct information
+10/6 9:40pm:Monster list can now scroll, Assignment is complete
+
+
+
+
+
+
+
+
+
+    
