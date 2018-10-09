@@ -3,6 +3,7 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <ncurses.h>
+#include <curses.h>
 
 /* Very slow seed: 686846853 */
 
@@ -248,6 +249,9 @@ int main(int argc, char *argv[])
 	 
 	  WINDOW * win = newwin(21, 80, 0, 0);
 	  box(win, 0, 0);
+
+	  //Enables arrows
+	  keypad(win, TRUE);
 	  
 	  //Places all the monsters in an array for easy access
 	  character_t *monsters[d.num_monsters];
@@ -267,12 +271,12 @@ int main(int argc, char *argv[])
 	  if(d.num_monsters > 19)
 	    {      
 	      //taking in the input for up and down 
-	      if(c == 'c' && index > 0)
+	      if(c == 259 && index > 0)
 		{
 		  index--;
 		}
 	  
-	      if(c == 'v' && index + 19 < d.num_monsters) 
+	      if(c == 258 && index + 19 < d.num_monsters) 
 		{
 		  index++; 
 		}
@@ -319,7 +323,7 @@ int main(int argc, char *argv[])
 	  }
 	  
 	  wrefresh(win);
-	  c = getch();
+	  c = wgetch(win);
 	}
       //render_dungeon(&d);
       endwin();

@@ -6,4 +6,4 @@ Description: Built off of Jeremy Sheaffer's code from assignment 1.04. This assi
 	     the user must input the command corresponding to the stair(ex: '>' enter '>', vise versa). Once the correct command is inputted
 	     the player will go up or down the stairs and a new dungeon will be generated with new monsters. The user can also pull up a list of
 	     the monsters which will show the monsters characters along with the direction with units from the player(North, South, East, West).
-	     Scrolling functionality is also implemented with the monster's list. 
+	     Scrolling functionality is also implemented with the monster's list. Any invalid input should be blocked to prevent segmentaion faults.

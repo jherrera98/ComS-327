@@ -45,9 +45,27 @@ void move_character(dungeon_t *d, character_t *c, pair_t next)
 
 void do_moves(dungeon_t *d, int dir)
 {
+  //checks q or null char
   if(dir == '\0' || dir == 'q'){
     return;
   }
+
+  //Checks for valid input
+  char charArr[] = {'y','7','k','8','u','9','l','6','n','3','j','2','b','1','h','4',32,'5'};
+  int i =0;
+  int contains = 0;
+  for (i = 0; i < 18; i++){
+    if (charArr[i] == dir){
+      contains = 1;
+      break;
+    }
+  }
+
+  if (contains ==0){
+    return;
+  }
+
+  
   pair_t next;
   character_t *c;
   event_t *e;
@@ -93,7 +111,10 @@ void do_moves(dungeon_t *d, int dir)
     }
 
     npc_next_pos(d, c, next);
+
     move_character(d, c, next);
+
+    
 
     heap_insert(&d->events, update_event(d, e, 1000 / c->speed));
   }
