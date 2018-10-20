@@ -158,8 +158,8 @@ void io_display_hardness(dungeon_t *d)
 
 static int compare_monster_distance(const void *v1, const void *v2)
 {
-  const character_t *const *c1 = (const character* const*)v1;
-  const character_t *const *c2 = (const character* const*)v2;
+  const character_t *const *c1 = (const Character* const*)v1;
+  const character_t *const *c2 = (const Character* const*)v2;
 
   return (dungeon->pc_distance[(*c1)->position[dim_y]][(*c1)->position[dim_x]] -
           dungeon->pc_distance[(*c2)->position[dim_y]][(*c2)->position[dim_x]]);
@@ -417,7 +417,7 @@ static void io_list_monsters(dungeon_t *d)
   character_t **c;
   uint32_t x, y, count;
 
-  c = (character**)malloc(d->num_monsters * sizeof (*c));
+  c = (character_t**)malloc(d->num_monsters * sizeof (*c));
 
   /* Get a linear list of monsters */
   for (count = 0, y = 1; y < DUNGEON_Y - 1; y++) {
