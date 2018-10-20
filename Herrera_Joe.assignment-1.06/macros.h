@@ -74,12 +74,12 @@ extern "C" {
 */
 
 #  define malloc(size) ({                                                  \
-   void *_tmp;                                                             \
+   char *_tmp;                                                             \
 /*                                                                         \
    printf("Attempting to allocate %d bytes " __FILE__ "%d\n",              \
           size, __LINE__);                                                 \
 */                                                                         \
-   _tmp = malloc(size); /* Can't use calloc directly, because it */        \
+   _tmp = (char*)malloc(size); /* Can't use calloc directly, because it */ \
    if (!_tmp) {               /* invokes the calloc macro.  Use bzero  */  \
      fprintf(stderr, "Allocation failed at %s:%d!\n", __FILE__, __LINE__); \
      exit(1);                                                              \
@@ -90,12 +90,12 @@ extern "C" {
 })
 
 #  define calloc(nmemb, size) ({                                           \
-   void *_tmp;                                                             \
+   char *_tmp;                                                             \
 /*                                                                         \
    printf("Attempting to allocate %d bytes " __FILE__ "%d\n",              \
          (int) (size * nmemb), __LINE__);                                  \
 */                                                                         \
-   _tmp = calloc(nmemb, size);                                             \
+   _tmp = (char*)calloc(nmemb, size);					\
    if (!_tmp) {                                                            \
      fprintf(stderr, "Allocation failed at %s:%d!\n", __FILE__, __LINE__); \
      exit(1);                                                              \
