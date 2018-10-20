@@ -11,10 +11,11 @@
  * is ugly.                                                             */
 static dungeon_t *dungeon;
 
-typedef struct path {
+class path_t {
+public:  
   heap_node_t *hn;
   uint8_t pos[2];
-} path_t;
+};
 
 static int32_t dist_cmp(const void *key, const void *with) {
   return ((int32_t) dungeon->pc_distance[((path_t *) key)->pos[dim_y]]

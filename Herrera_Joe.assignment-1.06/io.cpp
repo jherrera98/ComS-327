@@ -13,12 +13,13 @@
 /* Same ugly hack we did in path.c */
 static dungeon_t *dungeon;
 
-typedef struct io_message {
+class io_message_t{
+public:
   /* Will print " --more-- " at end of line when another message follows. *
    * Leave 10 extra spaces for that.                                      */
   char msg[71];
   struct io_message *next;
-} io_message_t;
+};
 
 static io_message_t *io_head, *io_tail;
 
@@ -45,7 +46,7 @@ void io_reset_terminal(void)
 
   while (io_head) {
     io_tail = io_head;
-    io_head = io_head->next;
+    io_head = (io_message_t*)io_head->next;
     free(io_tail);
   }
   io_tail = NULL;
@@ -72,7 +73,7 @@ void io_queue_message(const char *format, ...)
   if (!io_head) {
     io_head = io_tail = tmp;
   } else {
-    io_tail->next = tmp;
+    io_tail->next = (io_message*)tmp;
     io_tail = tmp;
   }
 }
@@ -84,7 +85,7 @@ static void io_print_message_queue(uint32_t y, uint32_t x)
     attron(COLOR_PAIR(COLOR_CYAN));
     mvprintw(y, x, "%-80s", io_head->msg);
     attroff(COLOR_PAIR(COLOR_CYAN));
-    io_head = io_head->next;
+    io_head = (io_message_t*)io_head->next;
     if (io_head) {
       attron(COLOR_PAIR(COLOR_CYAN));
       mvprintw(y, x + 70, "%10s", " --more-- ");

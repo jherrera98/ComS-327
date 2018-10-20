@@ -3,7 +3,8 @@
 
 #undef min
 
-struct heap_node {
+class heap_node{
+public:
   heap_node_t *next;
   heap_node_t *prev;
   heap_node_t *parent;
