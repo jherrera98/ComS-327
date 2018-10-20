@@ -1,0 +1,3 @@
+Assignment 1.06: Fog of War and Porting to C++
+Includes: rlg327.c, images, test_dungeon_files, character.c/h, dims.h, dungeon.c/h, event.c/h, heap.c/h, io.c/h, macros.h, move.c/h, npc.c/h, path.c/h, pc.c/h, utils.c/h, MakeFile, and CHANGELOG
+Description: Built off of Jeremy Sheaffer's code from assignment 1.05. 
