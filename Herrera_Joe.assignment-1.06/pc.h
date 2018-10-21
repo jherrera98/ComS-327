@@ -1,6 +1,7 @@
 #ifndef PC_H
 # define PC_H
 
+#include "dungeon.h"
 # include <stdint.h>
 #include "character.h"
 # include "dims.h"
@@ -8,6 +9,8 @@
 typedef struct dungeon dungeon_t;
 
 class pc: public Character{
+ public:
+  int map[21][80]; 
 };
 
 void pc_delete(pc_t *pc);
