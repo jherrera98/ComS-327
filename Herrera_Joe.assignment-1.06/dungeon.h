@@ -53,8 +53,6 @@ class room_t{
 
 class dungeon{
  public:
-
-
   uint32_t num_rooms;
   room_t *rooms;
   terrain_type_t map[DUNGEON_Y][DUNGEON_X];
@@ -70,7 +68,7 @@ class dungeon{
   uint8_t pc_distance[DUNGEON_Y][DUNGEON_X];
   uint8_t pc_tunnel[DUNGEON_Y][DUNGEON_X];
   Character *character[DUNGEON_Y][DUNGEON_X];
-  Character pc;
+  pc *PC;
   heap_t events;
   uint16_t num_monsters;
   uint16_t max_monsters;

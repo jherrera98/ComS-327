@@ -253,9 +253,9 @@ int main(int argc, char *argv[])
   printf("You defended your life in the face of %u deadly beasts.\n"
          "You avenged the cruel and untimely murders of %u "
          "peaceful dungeon residents.\n",
-         d.pc.kills[kill_direct], d.pc.kills[kill_avenged]);
+         d.PC->kills[kill_direct], d.PC->kills[kill_avenged]);
 
-  pc_delete(d.pc.pc);
+  pc_delete(d.PC);
 
   delete_dungeon(&d);
 

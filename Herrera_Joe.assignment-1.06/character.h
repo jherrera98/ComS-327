@@ -31,7 +31,7 @@ class Character{
    * characters have been created by the game.                              */
   uint32_t sequence_number;
   npc_t *npc;
-  pc_t *pc;
+  //pc_t *pc;
   uint32_t kills[num_kill_types];
 };
 

@@ -9,8 +9,8 @@
 typedef struct dungeon dungeon_t;
 
 class pc: public Character{
- public:
-  int map[21][80]; 
+  //public:
+  //int map[21][80]; 
 };
 
 void pc_delete(pc_t *pc);

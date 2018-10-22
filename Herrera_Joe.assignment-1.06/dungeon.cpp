@@ -712,8 +712,8 @@ int write_dungeon(dungeon_t *d, char *file)
   fwrite(&be32, sizeof (be32), 1, f);
 
   /* The PC position, 2 bytes, 20-21 */
-  fwrite(&d->pc.position[dim_x], 1, 1, f);
-  fwrite(&d->pc.position[dim_y], 1, 1, f);
+  fwrite(&d->PC->position[dim_x], 1, 1, f);
+  fwrite(&d->PC->position[dim_y], 1, 1, f);
 
   /* The dungeon map, 1680 bytes, 22-1702 */
   write_dungeon_map(d, f);
@@ -877,8 +877,8 @@ int read_dungeon(dungeon_t *d, char *file)
     exit(-1);
   }
 
-  fread(&d->pc.position[dim_x], 1, 1, f);
-  fread(&d->pc.position[dim_y], 1, 1, f);
+  fread(&d->PC->position[dim_x], 1, 1, f);
+  fread(&d->PC->position[dim_y], 1, 1, f);
   
   read_dungeon_map(d, f);
   d->num_rooms = calculate_num_rooms(buf.st_size);
@@ -1005,8 +1005,8 @@ void render_movement_cost_map(dungeon_t *d)
   putchar('\n');
   for (p[dim_y] = 0; p[dim_y] < DUNGEON_Y; p[dim_y]++) {
     for (p[dim_x] = 0; p[dim_x] < DUNGEON_X; p[dim_x]++) {
-      if (p[dim_x] ==  d->pc.position[dim_x] &&
-          p[dim_y] ==  d->pc.position[dim_y]) {
+      if (p[dim_x] ==  d->PC->position[dim_x] &&
+          p[dim_y] ==  d->PC->position[dim_y]) {
         putchar('@');
       } else {
         if (hardnesspair(p) == 255) {
@@ -1033,7 +1033,7 @@ void new_dungeon(dungeon_t *d)
   d->character_sequence_number = sequence_number;
 
   place_pc(d);
-  d->character[d->pc.position[dim_y]][d->pc.position[dim_x]] = &d->pc;
+  d->character[d->PC->position[dim_y]][d->PC->position[dim_x]] = (Character*)&d->PC;
 
   gen_monsters(d);
 }
