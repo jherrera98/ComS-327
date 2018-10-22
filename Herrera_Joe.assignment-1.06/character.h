@@ -30,7 +30,7 @@ class Character{
    * metadata: locally, how old is this character; and globally, how many   *
    * characters have been created by the game.                              */
   uint32_t sequence_number;
-  npc_t *npc;
+  //npc_t *npc;
   //pc_t *pc;
   uint32_t kills[num_kill_types];
 };

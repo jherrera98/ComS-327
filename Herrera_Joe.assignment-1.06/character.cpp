@@ -8,17 +8,8 @@
 
 void character_delete(void *v)
 {
-  /* The PC is never malloc()ed anymore, do don't attempt to free it here. */
-  character_t *c;
-
-  if (v) {
-    c = (character_t*)v;
-
-    if (c->npc) {
-      npc_delete(c->npc);
-      free(c);
-    }
-  }
+  //Since we are not using inheritance and pointers, we can just free the variable
+  free(v);
 }
 
 uint32_t can_see(dungeon_t *d, character_t *voyeur, character_t *exhibitionist)
