@@ -8,19 +8,19 @@
 #include "move.h"
 #include "path.h"
 
-void pc_delete(pc_t *pc)
+void pc_delete(pc *pc)
 {
   if (pc) {
     free(pc);
   }
 }
 
-uint32_t pc_is_alive(dungeon_t *d)
+uint32_t pc_is_alive(dungeon *d)
 {
   return d->PC->alive;
 }
 
-void place_pc(dungeon_t *d)
+void place_pc(dungeon *d)
 {
   d->PC->position[dim_y] = rand_range(d->rooms->position[dim_y],
                                      (d->rooms->position[dim_y] +
@@ -30,7 +30,7 @@ void place_pc(dungeon_t *d)
                                       d->rooms->size[dim_x] - 1));
 }
 
-void config_pc(dungeon_t *d)
+void config_pc(dungeon *d)
 {
 
   d->PC = new pc;
@@ -63,7 +63,7 @@ void config_pc(dungeon_t *d)
 
 }
 
-uint32_t pc_next_pos(dungeon_t *d, pair_t dir)
+uint32_t pc_next_pos(dungeon *d, pair_t dir)
 {
   static uint32_t have_seen_corner = 0;
   static uint32_t count = 0;
@@ -161,7 +161,7 @@ uint32_t pc_next_pos(dungeon_t *d, pair_t dir)
   return 0;
 }
 
-uint32_t pc_in_room(dungeon_t *d, uint32_t room)
+uint32_t pc_in_room(dungeon *d, uint32_t room)
 {
   if ((room < d->num_rooms)                                     &&
       (d->PC->position[dim_x] >= d->rooms[room].position[dim_x]) &&

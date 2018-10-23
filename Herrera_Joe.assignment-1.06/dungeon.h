@@ -5,7 +5,7 @@
 # include "macros.h"
 # include "dims.h"
 # include "character.h"
-#include "pc.h"
+//# include "pc.h"
 
 #define DUNGEON_X              80
 #define DUNGEON_Y              21
@@ -30,7 +30,6 @@
 #define charpair(pair) (d->character[pair[dim_y]][pair[dim_x]])
 #define charxy(x, y) (d->character[y][x])
 
-
 typedef enum __attribute__ ((__packed__)) terrain_type {
   ter_debug,
     ter_wall,
@@ -50,6 +49,7 @@ class room_t{
   pair_t size;
 };
 
+class pc;
 
 class dungeon{
  public:

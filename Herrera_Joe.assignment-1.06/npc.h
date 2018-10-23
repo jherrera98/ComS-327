@@ -55,7 +55,7 @@ class npc: public Character{
 };
 
 void gen_monsters(dungeon_t *d);
-void npc_delete(npc_t *n);
+void npc_delete(npc *n);
 void npc_next_pos(dungeon_t *d, npc *c, pair_t next);
 uint32_t dungeon_has_npcs(dungeon_t *d);
 
