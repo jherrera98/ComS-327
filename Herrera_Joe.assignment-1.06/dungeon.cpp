@@ -1033,7 +1033,7 @@ void new_dungeon(dungeon_t *d)
   d->character_sequence_number = sequence_number;
 
   place_pc(d);
-  d->character[d->PC->position[dim_y]][d->PC->position[dim_x]] = (Character*)&d->PC;
+  d->character[d->PC->position[dim_y]][d->PC->position[dim_x]] = (Character*)d->PC;
 
   gen_monsters(d);
 }

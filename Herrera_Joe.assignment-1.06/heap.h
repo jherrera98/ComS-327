@@ -7,8 +7,8 @@ extern "C" {
 
 # include <stdint.h>
 
-struct heap_node;
-typedef struct heap_node heap_node_t;
+class heap_node;
+typedef class heap_node heap_node_t;
  
   class heap_t{
   public:

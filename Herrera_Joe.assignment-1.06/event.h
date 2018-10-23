@@ -5,7 +5,7 @@
 
 # include "dungeon.h"
 
-typedef struct Character character_t;
+typedef class Character character_t;
 
 typedef enum event_type {
   event_character_turn,

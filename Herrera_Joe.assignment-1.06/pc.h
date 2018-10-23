@@ -6,7 +6,7 @@
 #include "character.h"
 # include "dims.h"
 
-typedef struct dungeon dungeon_t;
+typedef class dungeon dungeon_t;
 
 class pc: public Character{
   //public:

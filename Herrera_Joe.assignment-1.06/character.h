@@ -4,10 +4,10 @@
 # include <stdint.h>
 # include "dims.h"
 
-typedef struct dungeon dungeon_t;
-typedef struct npc npc_t;
-typedef struct pc pc_t;
-typedef struct dice_t dice_t;
+typedef class dungeon dungeon_t;
+typedef class npc npc_t;
+typedef class pc pc_t;
+typedef class dice_t dice_t;
 
 typedef enum kill_type {
   kill_direct,
@@ -37,7 +37,7 @@ class Character{
 
 int32_t compare_characters_by_next_turn(const void *character1,
 					const void *character2);
-uint32_t can_see(dungeon_t *d, Character *voyeur, Character *exhibitionist);
+uint32_t can_see(dungeon *d, Character *voyeur, Character *exhibitionist);
 void character_delete(void *c);
 
 #endif

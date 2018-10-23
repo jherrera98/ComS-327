@@ -5,8 +5,8 @@
 
 # include "dims.h"
 
-typedef struct dungeon dungeon_t;
-typedef struct Character character_t;
+typedef class dungeon dungeon_t;
+typedef class Character character_t;
 
 void next_move(dungeon_t *d,
                character_t *c,
