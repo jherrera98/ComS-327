@@ -205,7 +205,6 @@ void io_display(dungeon_t *d)
 
   clear();
 
-
   //Updates what the player's map, 5x5 region, even when fog of war is toggled off
   for (y = d->PC->position[dim_y] - 2; y < d->PC->position[dim_y] + 3; y++) {
     for (x = d->PC->position[dim_x] - 2; x < d->PC->position[dim_x] + 3; x++) {
@@ -333,28 +332,119 @@ void io_display_monster_list(dungeon_t *d)
 
 uint32_t io_teleport_PC(dungeon_t *d)
 {
-  /* Just for fun. */
-  pair_t dest;
+  int exit = 0;
+  int key;
 
+  //gets the coordinates for the cursor
+  pair_t dest;
+  dest[dim_y] = d->PC->position[dim_y] +1;
+  dest[dim_x] = d->PC->position[dim_x];
+
+
+  while(!exit){
+
+    //places the cursor on the map 
+    mvaddch(dest[dim_y], dest[dim_x], '*');
+    
+    key = getch();
+    switch (key) {
+    case '7':
+    case 'y':
+    case KEY_HOME:
+      dest[dim_y]--;
+      dest[dim_x]--;
+      break;
+    case '8':
+    case 'k':
+    case KEY_UP:
+      dest[dim_y]--;
+      break;
+    case '9':
+    case 'u':
+    case KEY_PPAGE:
+      dest[dim_y]--;
+      dest[dim_x]++;
+      break;
+    case '6':
+    case 'l':
+    case KEY_RIGHT:
+      dest[dim_x]++;
+      break;
+    case '3':
+    case 'n':
+    case KEY_NPAGE:
+      dest[dim_y]++;
+      dest[dim_x]++;
+      break;
+    case '2':
+    case 'j':
+    case KEY_DOWN:
+      dest[dim_y]++;
+      break;
+    case '1':
+    case 'b':
+    case KEY_END:
+      dest[dim_y]++;
+      dest[dim_x]--;
+      break;
+    case '4':
+    case 'h':
+    case KEY_LEFT:
+      dest[dim_x]--;
+      break;
+    case 'g':
+      d->character[d->PC->position[dim_y]][d->PC->position[dim_x]] = NULL;
+      //updates the position of the player
+      d->PC->position[dim_y] = dest[dim_y] -1;
+      d->PC->position[dim_x] = dest[dim_x];
+      d->character[d->PC->position[dim_y]][d->PC->position[dim_x]] = d->PC;
+      exit = 1;
+      break;
+    case 'r'://teleports the player
+      teleportRandomly(d);
+      exit = 1;
+      break;
+    case 'Q':
+      d->quit = 1;
+      break;
+    default:
+      /* Also not in the spec.  It's not always easy to figure out what *
+       * key code corresponds with a given keystroke.  Print out any    *
+       * unhandled key here.  Not only does it give a visual error      *
+       * indicator, but it also gives an integer value that can be used *
+       * for that key in this (or other) switch statements.  Printed in *
+       * octal, with the leading zero, because ncurses.h lists codes in *
+       * octal, thus allowing us to do reverse lookups.  If a key has a *
+       * name defined in the header, you can use the name here, else    *
+       * you can directly use the octal value.                          */
+      mvprintw(0, 0, "Unbound key: %#o ", key);
+    }
+    io_display(d);
+  }
+  return 0;
+}
+
+//helper method for io_teleport_pc
+void teleportRandomly(dungeon_t *d)
+{
+  pair_t dest;
+  
   do {
     dest[dim_x] = rand_range(1, DUNGEON_X - 2);
     dest[dim_y] = rand_range(1, DUNGEON_Y - 2);
   } while (charpair(dest));
-
+  
   d->character[d->PC->position[dim_y]][d->PC->position[dim_x]] = NULL;
   d->character[dest[dim_y]][dest[dim_x]] = d->PC;
-
+  
   d->PC->position[dim_y] = dest[dim_y];
   d->PC->position[dim_x] = dest[dim_x];
-
+  
   if (mappair(dest) < ter_floor) {
     mappair(dest) = ter_floor;
   }
-
   dijkstra(d);
   dijkstra_tunnel(d);
-
-  return 0;
 }
 /* Adjectives to describe our monsters */
 static const char *adjectives[] = {

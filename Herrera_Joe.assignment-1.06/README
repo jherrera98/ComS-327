@@ -1,3 +1,8 @@
 Assignment 1.06: Fog of War and Porting to C++
-Includes: rlg327.c, images, test_dungeon_files, character.c/h, dims.h, dungeon.c/h, event.c/h, heap.c/h, io.c/h, macros.h, move.c/h, npc.c/h, path.c/h, pc.c/h, utils.c/h, MakeFile, and CHANGELOG
-Description: Built off of Jeremy Sheaffer's code from assignment 1.05. 
+Includes: rlg327.cpp, images, test_dungeon_files, character.cpp/h, dims.h, dungeon.cpp/h, event.cpp/h, heap.cpp/h, io.cpp/h, macros.h, move.cpp/h, npc.cpp/h, path.cpp/h, pc.cpp/h, utils.cpp/h, MakeFile, and CHANGELOG
+Description: Built off of Jeremy Sheaffer's code from assignment 1.05. Started off by converting all .c files to .cpp, changed the structs to classes, and then casted variables
+	     where is was neccassary. I implemented inheritance in Jeremy's code. Once I got everything converted to C++, I implemented Fog Of War(5x5 view). The fog is enabled by default. Hitting 'f' on 
+	     the keyboard will toggle this feature on and off. Pressing 'g' will enable a cursor ('*') over the player character. The cursor may be moved around using the regular movement keys. 
+	     Pressing 'g' again will cause the player to teleport to the location of the cursor. Teleporting randomly is possible by pressing 'g' followed by 'r'. This may get the player character
+	     stuck in a rock or killed by a monster, use with caution. A side note: I left the functionality of the player character creating a floor terrain when teleporting, this was how it was 
+	     implemented in Jeremy's code, I wasn't sure whether or not to take this functionality off.
