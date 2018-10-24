@@ -5,7 +5,6 @@
 # include "macros.h"
 # include "dims.h"
 # include "character.h"
-//# include "pc.h"
 
 #define DUNGEON_X              80
 #define DUNGEON_Y              21
@@ -81,6 +80,9 @@ class dungeon{
   uint32_t time;
   uint32_t is_new;
   uint32_t quit;
+
+  //Starts off as 1 to indicate fog is on 
+  uint32_t toggleFogOfWar;
 };
 
 void init_dungeon(dungeon_t *d);

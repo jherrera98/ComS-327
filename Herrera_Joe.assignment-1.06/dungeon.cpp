@@ -621,6 +621,9 @@ void init_dungeon(dungeon_t *d)
   empty_dungeon(d);
   memset(&d->events, 0, sizeof (d->events));
   heap_init(&d->events, compare_events, event_delete);
+  
+  //Enables fog to begin the game with
+  d->toggleFogOfWar = 1;
 }
 
 int write_dungeon_map(dungeon_t *d, FILE *f)

@@ -200,45 +200,100 @@ static character_t *io_nearest_visible_monster(dungeon_t *d)
 
 void io_display(dungeon_t *d)
 {
-  uint32_t y, x;
+  int32_t y, x;
   character_t *c;
 
   clear();
-  for (y = 0; y < 21; y++) {
-    for (x = 0; x < 80; x++) {
-      if (d->character[y][x]) {
-        mvaddch(y + 1, x, d->character[y][x]->symbol);//pulls symbol based on character map
-      } else {
-        switch (mapxy(x, y)) {
-        case ter_wall:
-        case ter_wall_immutable:
-          mvaddch(y + 1, x, ' ');
-          break;
-        case ter_floor:
-        case ter_floor_room:
-          mvaddch(y + 1, x, '.');
-          break;
-        case ter_floor_hall:
-          mvaddch(y + 1, x, '#');
-          break;
-        case ter_debug:
-          mvaddch(y + 1, x, '*');
-          break;
-        case ter_stairs_up:
-          mvaddch(y + 1, x, '<');
-          break;
-        case ter_stairs_down:
-          mvaddch(y + 1, x, '>');
-          break;
-        default:
- /* Use zero as an error symbol, since it stands out somewhat, and it's *
-  * not otherwise used.                                                 */
-          mvaddch(y + 1, x, '0');
-        }
-      }
+
+
+  //Updates what the player's map, 5x5 region, even when fog of war is toggled off
+  for (y = d->PC->position[dim_y] - 2; y < d->PC->position[dim_y] + 3; y++) {
+    for (x = d->PC->position[dim_x] - 2; x < d->PC->position[dim_x] + 3; x++) {
+      d->PC->map[y][x] = mapxy(x,y);
     }
   }
 
+  //Displays the fog if the toggle is on
+  if(d->toggleFogOfWar){
+    //Displays the dungeon in perspective of the player character
+    for (y = d->PC->position[dim_y] - 2; y < d->PC->position[dim_y] + 3; y++) {
+      for (x = d->PC->position[dim_x] - 2; x < d->PC->position[dim_x] + 3; x++) {
+	if (d->character[y][x]) {
+	  mvaddch(y + 1, x, d->character[y][x]->symbol);//pulls symbol based on character map
+	} else {
+	  switch (d->PC->map[y][x]) {
+	  case ter_wall:
+	  case ter_wall_immutable:
+	    mvaddch(y + 1, x, ' ');
+	    break;
+	  case ter_floor:
+	  case ter_floor_room:
+	    mvaddch(y + 1, x, '.');
+	    break;
+	  case ter_floor_hall:
+	    mvaddch(y + 1, x, '#');
+	    break;
+	  case ter_debug:
+	    mvaddch(y + 1, x, '*');
+	    break;
+	  case ter_stairs_up:
+	    mvaddch(y + 1, x, '<');
+          break;
+	  case ter_stairs_down:
+	    mvaddch(y + 1, x, '>');
+	    break;
+	  default:
+	    /* Use zero as an error symbol, since it stands out somewhat, and it's *
+	     * not otherwise used.                                                 */
+	    mvaddch(y + 1, x, '0');
+	  }
+	}
+      }
+    }
+  }
+  else{    
+    //this is for regular display of the dungeon
+    for (y = 0; y < 21; y++) {
+      for (x = 0; x < 80; x++) {
+	if (d->character[y][x]) {
+	  mvaddch(y + 1, x, d->character[y][x]->symbol);//pulls symbol based on character map
+	} else {
+	  switch (mapxy(x, y)) {
+	  case ter_wall:
+	  case ter_wall_immutable:
+	    mvaddch(y + 1, x, ' ');
+          break;
+	  case ter_floor:
+	  case ter_floor_room:
+	    mvaddch(y + 1, x, '.');
+	    break;
+	  case ter_floor_hall:
+	    mvaddch(y + 1, x, '#');
+	    break;
+	  case ter_debug:
+	    mvaddch(y + 1, x, '*');
+	    break;
+	  case ter_stairs_up:
+          mvaddch(y + 1, x, '<');
+          break;
+	  case ter_stairs_down:
+	    mvaddch(y + 1, x, '>');
+	    break;
+	  default:
+	    /* Use zero as an error symbol, since it stands out somewhat, and it's *
+	     * not otherwise used.                                                 */
+	    mvaddch(y + 1, x, '0');
+	  }
+	}
+      }
+    }  
+  }
+  
+  
+
+
+
+    
   mvprintw(23, 1, "PC position is (%2d,%2d).",
            d->PC->position[dim_x], d->PC->position[dim_y]);
   mvprintw(22, 1, "%d known %s.", d->num_monsters,
@@ -535,6 +590,11 @@ void io_handle_input(dungeon_t *d)
       break;
     case 'm':
       io_list_monsters(d);
+      fail_code = 1;
+      break;
+    case 'f':
+      d->toggleFogOfWar = (d->toggleFogOfWar + 1) % 2;
+      io_display(d);
       fail_code = 1;
       break;
     case 'q':

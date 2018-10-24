@@ -35,8 +35,6 @@ void config_pc(dungeon *d)
   d->PC->speed = PC_SPEED;
   d->PC->alive = 1;
   d->PC->sequence_number = 0;
-  //d->PC = (pc*)calloc(1, sizeof (*d->PC));
-  // d->PC->npc = NULL;
   d->PC->kills[kill_direct] = d->PC->kills[kill_avenged] = 0;
 
   d->character[d->PC->position[dim_y]][d->PC->position[dim_x]] = d->PC;
@@ -44,7 +42,7 @@ void config_pc(dungeon *d)
   dijkstra(d);
   dijkstra_tunnel(d);
 
-  /*
+  
   //Filling pc's map with rock
   int x, y;
   for (y = 0; y < DUNGEON_Y; y++) {
@@ -52,8 +50,6 @@ void config_pc(dungeon *d)
       d->PC->map[y][x] = ter_wall_immutable;
       }
   }
-  */
-
 }
 
 uint32_t pc_next_pos(dungeon *d, pair_t dir)

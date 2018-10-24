@@ -7,17 +7,9 @@
 # include "character.h"
 # include "dungeon.h"
 
-//typedef class dungeon dungeon_t;
-
-//typedef enum terrain_type terrain_type_t;
-
-//enum terrain_type : terrain_type_t; 
-
-//enumterrain_type_t
-
 class pc: public Character{
   public:
-  terrain_type_t map[21][80]; 
+  terrain_type_t map[DUNGEON_Y][DUNGEON_X]; 
 };
 
 uint32_t pc_is_alive(dungeon *d);

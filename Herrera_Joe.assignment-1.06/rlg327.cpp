@@ -210,7 +210,7 @@ int main(int argc, char *argv[])
     gen_dungeon(&d);
   }
 
-  /* Ignoring PC position in saved dungeons.  Not a bug. */
+  /* Ignoring PC position in saved dungeons.  Not a bug.*/
   config_pc(&d);
   gen_monsters(&d);
 
