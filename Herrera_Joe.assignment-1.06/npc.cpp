@@ -27,7 +27,7 @@ static uint32_t max_monster_cells(dungeon_t *d)
 void gen_monsters(dungeon_t *d)
 {
   uint32_t i;
-  npc *m = new npc;
+  npc *m;
   uint32_t room;
   pair_t p;
   const static char symbol[] = "0123456789abcdef";

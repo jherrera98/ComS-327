@@ -36,6 +36,6 @@ class Character{
 int32_t compare_characters_by_next_turn(const void *character1,
 					const void *character2);
 uint32_t can_see(dungeon *d, Character *voyeur, Character *exhibitionist);
-void character_delete(void *c);
+void character_delete(Character *c);
 
 #endif

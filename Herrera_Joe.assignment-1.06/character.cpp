@@ -6,10 +6,9 @@
 #include "pc.h"
 #include "dungeon.h"
 
-void character_delete(void *v)
+void character_delete(Character *v)
 {
-  //Since we are not using inheritance and pointers, we can just free the variable
-  free(v);
+  delete(v);
 }
 
 uint32_t can_see(dungeon_t *d, Character *voyeur, Character *exhibitionist)

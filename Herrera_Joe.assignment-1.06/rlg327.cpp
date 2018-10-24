@@ -255,8 +255,6 @@ int main(int argc, char *argv[])
          "peaceful dungeon residents.\n",
          d.PC->kills[kill_direct], d.PC->kills[kill_avenged]);
 
-  pc_delete(d.PC);
-
   delete_dungeon(&d);
 
   return 0;
