@@ -1,0 +1,3 @@
+Assignment 1.07: Parsing Monster Definitions
+Includes: rlg327.cpp, images, test_dungeon_files, character.cpp/h, dims.h, dungeon.cpp/h, event.cpp/h, heap.c/h, io.cpp/h, macros.h, move.cpp/h, npc.cpp/h, path.cpp/h, pc.cpp/h, utils.cpp/h, MakeFile, and CHANGELOG
+Description: Built off of Jeremy Sheaffer's code from assignment 1.06
