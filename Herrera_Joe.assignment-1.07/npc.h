@@ -1,16 +1,10 @@
 #ifndef NPC_H
 # define NPC_H
-//#include <string>
+
 # include <stdint.h>
-//#include <string>
-//#include <vector>
 
 # include "dims.h"
 # include "character.h"
-//#include "dice.h"
-
-
-//using namespace std;
 
 # define NPC_SMART         0x00000001
 # define NPC_TELEPATH      0x00000002
@@ -50,50 +44,11 @@
 
 typedef uint32_t npc_characteristics_t;
 
-
-
-//all available abilities 
-/*
-enum Abilities{
-  SMART,
-  TELE,
-  TUNNEL,
-  ERRATIC,
-  PASS,
-  PICKUP,
-  DESSTROY,
-  UNIQ,
-  BOSS
-};
-
-enum Colors{
-  RED,
-  GREEN,
-  BLUE,
-  CYAN,
-  YELLOW,
-  MAGENTA,
-  WHITE,
-  BLACK
-};
-*/
-
 class npc : public character {
  public:
   npc_characteristics_t characteristics;
   uint32_t have_seen_pc;
   pair_t pc_last_known_position;
-  
-  //all other information 
-  //string NAME;
-  //string DESC;
-  //vector<Colors> COLOR;
-  //Dice SPEED;
-  //vector<Abilities> ABIL;
-  //Dice HP;
-  //Dice DAM;
-  //char SYMB;
-  //uint8_t RRTY;
 };
 
 void gen_monsters(dungeon *d);

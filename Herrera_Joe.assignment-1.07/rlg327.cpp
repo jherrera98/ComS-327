@@ -5,8 +5,8 @@
 
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <string>
+#include <vector>
 
 /* Very slow seed: 686846853 */
 
@@ -15,9 +15,6 @@
 #include "npc.h"
 #include "move.h"
 #include "io.h"
-
-
-using namespace std;
 
 
 const char *victory =
@@ -83,6 +80,64 @@ void usage(char *name)
   exit(-1);
 }
 
+using namespace std;
+
+
+enum Abilities{
+  SMART,
+  TELE,
+  TUNNEL,
+  ERRATIC,
+  PASS,
+  PICKUP,
+  DESSTROY,
+  UNIQ,
+  BOSS
+};
+
+enum Colors{
+  RED,
+  GREEN,
+  BLUE,
+  CYAN,
+  YELLOW,
+  MAGENTA,
+  WHITE,
+  BLACK
+};
+
+
+class Dice
+{
+ public:
+  uint8_t base;
+  uint8_t dice;
+  uint8_t sides;
+
+  //Prints the dice out in a formatted string 
+  std::string printDice();
+};
+
+string Dice::printDice(){
+  string temp;
+  temp = base + "+" + dice + 'd' + sides;
+  return temp;
+}
+
+class Monster{
+ public:
+  std::string NAME;
+  string DESC;
+  vector<Colors> COLOR;
+  Dice SPEED;
+  vector<Abilities> ABIL;
+  Dice HP;
+  Dice DAM;
+  char SYMB;
+  uint8_t RRTY;
+};
+
+
 int main(int argc, char *argv[])
 {
   dungeon d;
@@ -135,12 +190,63 @@ int main(int argc, char *argv[])
   getline(f, s);
 
   
-  string temp;
-  getline(f,s);
+  //getline(f,s);//Pulling NAME....
+  f>>s;
+  
   while(s != "END"){
-    cout << s << endl;
-    getline(f,s);
+
+    if(s == "NAME"){
+      f.get();//consumes leading whitespace
+      getline(f,s);
+      cout << s << endl;
+    }
+    else if(s == "DESC"){
+      string description;
+      int byteCount =1;
+      while(f.peek() != '.'){
+	string line;
+	getline(f,line);
+        
+	//read char by char until end of line
+	for(string::iterator it = line.begin(); it != line.end(); it++){
+	  if(byteCount % 77 == 0){
+	    description += "\n";
+	  }
+	  description += *it;
+	  byteCount++;
+	}
+      }
+      cout << description << endl;
+      getline(f,s);//consumes the last period
+    }
+    else if (s == "COLOR"){
+      
+      vector<string> c;
+
+      while(f.peek() != '\n'){
+	//consume the space and then gets the next color
+	//f>>s;
+	f>>s;
+	c.push_back(s);
+      }
+
+      //Printing out the vector
+      
+      cout<< "COLOR ";
+
+      vector<string>::iterator it;
+      for(it = c.begin(); it != c.end(); it++){
+	cout << *it << " ";
+      }
+      cout<<endl;
+    }
+    else{
+      cout << "invalid" << endl;
+    }
+    //Gets the next keyword
+    f>>s;
   }
+  
   
   exit(1);
   
