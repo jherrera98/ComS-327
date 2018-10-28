@@ -1,3 +1,7 @@
 Assignment 1.07: Parsing Monster Definitions
 Includes: rlg327.cpp, images, test_dungeon_files, character.cpp/h, dims.h, dungeon.cpp/h, event.cpp/h, heap.c/h, io.cpp/h, macros.h, move.cpp/h, npc.cpp/h, path.cpp/h, pc.cpp/h, utils.cpp/h, MakeFile, and CHANGELOG
-Description: Built off of Jeremy Sheaffer's code from assignment 1.06
+Description: Built off of Jeremy Sheaffer's code from assignment 1.06. This assignment was to read in a file called ""monster_desc.txt" and parse the information of each
+	     monster. Then print the monster out if it met the critera of defining all required keywords, otherwise the monster will be discarded. My program meets all requirements
+	     of parsing the file(located under HOME in .rlg327/) and then printing out the monster if it met the critera. I was able to complete this by parsing the information of 
+	     each monster into their own monster objects which I would print with a method called printMonster if the monster met all critera. I did not do the option part of this 
+	     assignment which was to parse the information from the "object_desc.txt" file.

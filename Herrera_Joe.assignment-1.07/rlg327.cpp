@@ -182,7 +182,8 @@ int main(int argc, char *argv[])
   //Setting the path of the file
   string filePath;
   filePath = getenv("HOME");
-  filePath +=  "/monster_desc.txt";
+  filePath += "/.rlg327/";
+  filePath +=  "monster_desc.txt";
 
   //Reading from file 
   ifstream f (filePath.c_str());
@@ -197,14 +198,12 @@ int main(int argc, char *argv[])
     exit (1);
   }
 
-  
+  cout<<endl;
   while(!f.eof())
     {
-      //consumes new line 
-      //f.get();  
-      
       string s;
-      //consumes "BEGIN MONSTER"
+
+      //Searches for the next monster to make
       getline(f, s);
       while (s != "BEGIN MONSTER"){
 	getline(f,s);
@@ -212,9 +211,9 @@ int main(int argc, char *argv[])
 	  break;
 	}
       }
+
       Monster m;
-      //getline(f,s);//Pulling NAME....
-      f>>s;
+      f>>s;// Comsumes newline
       
       int keywordCount = 0;
       while(s != "END"){
@@ -223,18 +222,15 @@ int main(int argc, char *argv[])
 	  f.get();//consumes leading whitespace
 	  getline(f,s);
 	  m.NAME = s;
-	  //cout << s << endl;
 	}
 	else if(s == "DESC"){
 	  string description;
 	  int byteCount =0;
 	  int addedNewLine =0;
 	  
-	  
 	  while(f.peek() != '.'){
 	    string line;
 	    getline(f,line);
-	    
 	    
 	    //read char by char until end of line
 	    for(string::iterator it = line.begin(); it != line.end(); it++){
@@ -252,86 +248,49 @@ int main(int argc, char *argv[])
 	    addedNewLine =0;
 	  }
 	  m.DESC = description;
-	  //cout << description << endl;
 	  getline(f,s);//consumes the last period
 	}
 	else if (s == "COLOR"){
-	  
 	  vector<string> c;
 	  
 	  while(f.peek() != '\n'){
 	    //consume the space and then gets the next color
-	    //f>>s;
 	    f>>s;
 	    c.push_back(s);
 	  }
 	  
 	  m.COLOR = c;
-	  
-	  //Printing out the vector
-	  
-	  //cout<< "COLOR ";
-	  
-	  vector<string>::iterator it;
-	  for(it = c.begin(); it != c.end(); it++){
-	    //m.COLOR.push_back(*it);
-	    //cout << *it << " ";
-	  }
-	  cout<<endl;
 	}
 	else if(s == "SPEED"){
 	  f>>s;//Gets the dice value
-	  m.SPEED = s;
-	  //cout<< "Speed " << s << endl;
-	  //Parses the string
-	  //Dice die;
-	  //die.base = std::stoi(temp.substr(0,temp.find("d")));
-	  //cout << die.base<< endl;	      
+	  m.SPEED = s;      
 	}
 	else if (s == "ABIL"){
-	  //cout<< "Abilities ";
 	  vector<string> a;
 	  
 	  while(f.peek() != '\n'){
 	    f>>s;
 	    a.push_back(s);
 	  }
-	  
 	  m.ABIL = a;
-	  
-	  vector<string>::iterator it;
-	  for(it = a.begin(); it != a.end(); it++){
-	    //cout << *it << " ";
-	  }
-	  //cout<<endl;
 	}
 	else if(s == "HP"){
 	  f>>s;//Gets the dice value
 	  m.HP = s;
-	  //cout<< "HP " << s << endl;
 	}
 	else if(s == "DAM"){
 	  f>>s;//Gets the dice value
 	  m.DAM = s;
-	  //cout<< "DAM " << s << endl;
 	}
 	else if(s == "SYMB"){
 	  f>>s;//Gets the dice value
-	  
 	  m.SYMB = s;
-	  
-	  //cout<< "SYMB " << s << endl;
 	}
 	else if (s == "RRTY"){
-	  f>>s;//Gets the dice value
-	  
-	  m.RRTY = s;
-	  
-	  //cout<< "RRTY " << s << endl;
-	  
+	  f>>s;//Gets the dice value	  
+	  m.RRTY = s;  
 	}
 	else{
-	  // cout << "invalid" << endl;
 	  //Discard monster by breaking the while loop
 	  break;
 	}
@@ -339,16 +298,11 @@ int main(int argc, char *argv[])
 	f>>s;
 	keywordCount++;
       }
-      
+      //This checks to see if there were only 9 keywords
       if (keywordCount == 9){
 	m.printMonster(m);
       } 
-
-      
     }
-  
-  
-  
   
   exit(1);
   
