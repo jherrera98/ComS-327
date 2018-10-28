@@ -208,6 +208,9 @@ int main(int argc, char *argv[])
       getline(f, s);
       while (s != "BEGIN MONSTER"){
 	getline(f,s);
+	if(f.eof()){
+	  break;
+	}
       }
       Monster m;
       //getline(f,s);//Pulling NAME....
