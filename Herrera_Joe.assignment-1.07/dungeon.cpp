@@ -7,6 +7,7 @@
 #include <errno.h>
 
 #include "dungeon.h"
+//#include "dice.h"
 #include "utils.h"
 #include "heap.h"
 #include "event.h"

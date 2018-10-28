@@ -3,6 +3,11 @@
 #include <sys/time.h>
 #include <unistd.h>
 
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+
 /* Very slow seed: 686846853 */
 
 #include "dungeon.h"
@@ -10,6 +15,10 @@
 #include "npc.h"
 #include "move.h"
 #include "io.h"
+
+
+using namespace std;
+
 
 const char *victory =
   "\n                                       o\n"
@@ -86,6 +95,55 @@ int main(int argc, char *argv[])
   char *load_file;
   char *pgm_file;
 
+  //Assignment 1.07 
+  
+  //Setting the path of the file
+  string filePath;
+  filePath = getenv("HOME");
+  filePath +=  "/monster_desc.txt";
+
+  //Reading from file 
+  ifstream f (filePath.c_str());
+
+  //Storing the header of the file
+  string title;
+  getline(f, title); 
+
+  //Checks to see if the header is appropriate
+  if(title != "RLG327 MONSTER DESCRIPTION 1"){
+    printf("\ninvalid header in file\n\n");
+    exit (1);
+  }
+
+  /*
+    while(!f.eof())
+    {
+      string temp;
+      getline(f, temp);
+      cout << temp << endl;
+    }
+  
+  printf("End of file reached");
+  */
+  
+
+  //consumes new line 
+  f.get();  
+
+  string s;
+  //consumes "BEGIN MONSTER"
+  getline(f, s);
+
+  
+  string temp;
+  getline(f,s);
+  while(s != "END"){
+    cout << s << endl;
+    getline(f,s);
+  }
+  
+  exit(1);
+  
   /* Quiet a false positive from valgrind. */
   memset(&d, 0, sizeof (d));
   
