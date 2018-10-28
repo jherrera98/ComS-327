@@ -114,8 +114,8 @@ class Dice
   uint8_t dice;
   uint8_t sides;
 
-  //Prints the dice out in a formatted string 
-  std::string printDice();
+  //Returns the dice in a formatted string 
+  string printDice();
 };
 
 string Dice::printDice(){
@@ -128,14 +128,41 @@ class Monster{
  public:
   std::string NAME;
   string DESC;
-  vector<Colors> COLOR;
-  Dice SPEED;
-  vector<Abilities> ABIL;
-  Dice HP;
-  Dice DAM;
-  char SYMB;
-  uint8_t RRTY;
+  vector<string> COLOR;//vector<Colors> COLOR;
+  string SPEED;//Dice SPEED;
+  vector<string> ABIL; //vector<Abilities> ABIL;
+  string HP;//Dice HP;
+  string DAM;//Dice DAM;
+  string die;
+  string SYMB;
+  string RRTY;
+
+  //Prints the monster out to the console
+  void printMonster(Monster m);
 };
+
+void Monster::printMonster(Monster m){
+  cout << m.NAME;
+  cout << m.DESC;
+  cout << m.SYMB << endl;
+
+  //Prints out colors
+  vector<string>::iterator it;
+  for(it = m.COLOR.begin(); it != m.COLOR.end(); it++){
+    cout << *it << " ";
+  }cout << endl;
+
+  cout << m.SPEED << endl;
+  
+  //Prints out Abilities
+  for(it = m.ABIL.begin(); it != m.ABIL.end(); it++){
+    cout << *it << " ";
+  }cout << endl;
+  
+  cout << m.HP << endl;
+  cout << m.DAM << endl;
+  cout << m.RRTY << endl << endl;
+}
 
 
 int main(int argc, char *argv[])
@@ -170,82 +197,154 @@ int main(int argc, char *argv[])
     exit (1);
   }
 
-  /*
-    while(!f.eof())
+  
+  while(!f.eof())
     {
-      string temp;
-      getline(f, temp);
-      cout << temp << endl;
-    }
-  
-  printf("End of file reached");
-  */
-  
+      //consumes new line 
+      //f.get();  
+      
+      string s;
+      //consumes "BEGIN MONSTER"
+      getline(f, s);
+      while (s != "BEGIN MONSTER"){
+	getline(f,s);
+      }
+      Monster m;
+      //getline(f,s);//Pulling NAME....
+      f>>s;
+      
+      int keywordCount = 0;
+      while(s != "END"){
 
-  //consumes new line 
-  f.get();  
-
-  string s;
-  //consumes "BEGIN MONSTER"
-  getline(f, s);
-
-  
-  //getline(f,s);//Pulling NAME....
-  f>>s;
-  
-  while(s != "END"){
-
-    if(s == "NAME"){
-      f.get();//consumes leading whitespace
-      getline(f,s);
-      cout << s << endl;
-    }
-    else if(s == "DESC"){
-      string description;
-      int byteCount =1;
-      while(f.peek() != '.'){
-	string line;
-	getline(f,line);
-        
-	//read char by char until end of line
-	for(string::iterator it = line.begin(); it != line.end(); it++){
-	  if(byteCount % 77 == 0){
-	    description += "\n";
-	  }
-	  description += *it;
-	  byteCount++;
+	if(s == "NAME"){
+	  f.get();//consumes leading whitespace
+	  getline(f,s);
+	  m.NAME = s;
+	  //cout << s << endl;
 	}
-      }
-      cout << description << endl;
-      getline(f,s);//consumes the last period
-    }
-    else if (s == "COLOR"){
-      
-      vector<string> c;
-
-      while(f.peek() != '\n'){
-	//consume the space and then gets the next color
-	//f>>s;
+	else if(s == "DESC"){
+	  string description;
+	  int byteCount =0;
+	  int addedNewLine =0;
+	  
+	  
+	  while(f.peek() != '.'){
+	    string line;
+	    getline(f,line);
+	    
+	    
+	    //read char by char until end of line
+	    for(string::iterator it = line.begin(); it != line.end(); it++){
+	      if(byteCount % 78 == 0 && it != line.begin()){
+		description += "\n";
+		addedNewLine =1; 
+	      }
+	      description += *it;
+	      byteCount++;
+	    }
+	    if(!addedNewLine){
+	      description += "\n";
+	      byteCount = 0;
+	    }
+	    addedNewLine =0;
+	  }
+	  m.DESC = description;
+	  //cout << description << endl;
+	  getline(f,s);//consumes the last period
+	}
+	else if (s == "COLOR"){
+	  
+	  vector<string> c;
+	  
+	  while(f.peek() != '\n'){
+	    //consume the space and then gets the next color
+	    //f>>s;
+	    f>>s;
+	    c.push_back(s);
+	  }
+	  
+	  m.COLOR = c;
+	  
+	  //Printing out the vector
+	  
+	  //cout<< "COLOR ";
+	  
+	  vector<string>::iterator it;
+	  for(it = c.begin(); it != c.end(); it++){
+	    //m.COLOR.push_back(*it);
+	    //cout << *it << " ";
+	  }
+	  cout<<endl;
+	}
+	else if(s == "SPEED"){
+	  f>>s;//Gets the dice value
+	  m.SPEED = s;
+	  //cout<< "Speed " << s << endl;
+	  //Parses the string
+	  //Dice die;
+	  //die.base = std::stoi(temp.substr(0,temp.find("d")));
+	  //cout << die.base<< endl;	      
+	}
+	else if (s == "ABIL"){
+	  //cout<< "Abilities ";
+	  vector<string> a;
+	  
+	  while(f.peek() != '\n'){
+	    f>>s;
+	    a.push_back(s);
+	  }
+	  
+	  m.ABIL = a;
+	  
+	  vector<string>::iterator it;
+	  for(it = a.begin(); it != a.end(); it++){
+	    //cout << *it << " ";
+	  }
+	  //cout<<endl;
+	}
+	else if(s == "HP"){
+	  f>>s;//Gets the dice value
+	  m.HP = s;
+	  //cout<< "HP " << s << endl;
+	}
+	else if(s == "DAM"){
+	  f>>s;//Gets the dice value
+	  m.DAM = s;
+	  //cout<< "DAM " << s << endl;
+	}
+	else if(s == "SYMB"){
+	  f>>s;//Gets the dice value
+	  
+	  m.SYMB = s;
+	  
+	  //cout<< "SYMB " << s << endl;
+	}
+	else if (s == "RRTY"){
+	  f>>s;//Gets the dice value
+	  
+	  m.RRTY = s;
+	  
+	  //cout<< "RRTY " << s << endl;
+	  
+	}
+	else{
+	  // cout << "invalid" << endl;
+	  //Discard monster by breaking the while loop
+	  break;
+	}
+	//Gets the next keyword
 	f>>s;
-	c.push_back(s);
+	keywordCount++;
       }
-
-      //Printing out the vector
       
-      cout<< "COLOR ";
+      if (keywordCount == 9){
+	m.printMonster(m);
+      } 
 
-      vector<string>::iterator it;
-      for(it = c.begin(); it != c.end(); it++){
-	cout << *it << " ";
-      }
-      cout<<endl;
+      
     }
-    else{
-      cout << "invalid" << endl;
-    }
-    //Gets the next keyword
-    f>>s;
-  }
+  
+  
   
   
   exit(1);
