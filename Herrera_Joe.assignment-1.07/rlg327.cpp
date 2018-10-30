@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 #include <vector>
 
 /* Very slow seed: 686846853 */
@@ -115,12 +116,18 @@ class Dice
   uint8_t sides;
 
   //Returns the dice in a formatted string 
-  string printDice();
+  string printDice(void);
 };
 
-string Dice::printDice(){
+string Dice::printDice(void){
   string temp;
-  temp = base + "+" + dice + 'd' + sides;
+  std::ostringstream string1;
+  string1<< base;
+  std::ostringstream string2;
+  string2 << dice;
+  std::ostringstream string3;
+  string3 << sides;
+  temp = string1.str() + "+" + string2.str() + "d" + string3.str();
   return temp;
 }
 
@@ -129,11 +136,11 @@ class Monster{
   std::string NAME;
   string DESC;
   vector<string> COLOR;//vector<Colors> COLOR;
-  string SPEED;//Dice SPEED;
+  Dice SPEED;
   vector<string> ABIL; //vector<Abilities> ABIL;
   string HP;//Dice HP;
   string DAM;//Dice DAM;
-  string die;
+  //Dice die;
   string SYMB;
   string RRTY;
 
@@ -152,7 +159,8 @@ void Monster::printMonster(Monster m){
     cout << *it << " ";
   }cout << endl;
 
-  cout << m.SPEED << endl;
+  string speed = m.SPEED.printDice();
+  cout << speed << endl;
   
   //Prints out Abilities
   for(it = m.ABIL.begin(); it != m.ABIL.end(); it++){
@@ -225,27 +233,22 @@ int main(int argc, char *argv[])
 	}
 	else if(s == "DESC"){
 	  string description;
-	  int byteCount =0;
-	  int addedNewLine =0;
 	  
 	  while(f.peek() != '.'){
 	    string line;
 	    getline(f,line);
+
+	    int byteCount =0;
 	    
 	    //read char by char until end of line
 	    for(string::iterator it = line.begin(); it != line.end(); it++){
-	      if(byteCount % 78 == 0 && it != line.begin()){
-		description += "\n";
-		addedNewLine =1; 
-	      }
 	      description += *it;
 	      byteCount++;
 	    }
-	    if(!addedNewLine){
-	      description += "\n";
-	      byteCount = 0;
-	    }
-	    addedNewLine =0;
+	    if(byteCount > 77){ 
+	      keywordCount = -10;//This is so that the monster will be thrown out in the end
+	      }
+	    description +="\n";
 	  }
 	  m.DESC = description;
 	  getline(f,s);//consumes the last period
@@ -262,8 +265,29 @@ int main(int argc, char *argv[])
 	  m.COLOR = c;
 	}
 	else if(s == "SPEED"){
-	  f>>s;//Gets the dice value
-	  m.SPEED = s;      
+	  f>>s;//Gets the dice value as a string 
+
+	  Dice d;
+
+	  //Parses the intergers out of the string
+	  stringstream stream(s);
+	  int i=0;
+	  int number;
+	  while (stream >> number){
+	    cout << number<< endl;
+	    switch(i){
+	    case 0: d.base = number; 
+	      break;
+	    case 1: d.dice = number; 
+	      break;
+	    case 2: d.sides = 10;
+	      break;
+	    default: keywordCount = -10;//This is so the moster gets thrown away
+	      break;
+	    }
+	    i++;
+	  }
+	  m.SPEED = d;      
 	}
 	else if (s == "ABIL"){
 	  vector<string> a;

@@ -1,1 +1,36 @@
+ESC[33mcommit b248ebef93ab188781281a0c318ae02267d61f54ESC[m
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sun Oct 28 13:11:01 2018 -0500
+
+    Cleaned up the assignment, finished project
+
+ESC[33mcommit a92990b7504cfacbde825752ec99ff78f7aefbdbESC[m
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sun Oct 28 12:39:22 2018 -0500
+
+    Fixed the infinite loop
+
+ESC[33mcommit d9a96a15b2b172a60705f0a347a5d7b0f9f66631ESC[m
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sun Oct 28 12:35:01 2018 -0500
+
+    Got all monsters to print out, stuck in a infinite loop
+
+ESC[33mcommit 13433b2faf3aeae1e04f2c324cd81c58dacb58ebESC[m
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sun Oct 28 00:37:42 2018 -0500
+
+    Started parsing information such as description, name, and colors
+
+ESC[33mcommit 5182b61e7b9e4e4a71dfd2a6b33a57a3d3b88defESC[m
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 27 22:30:04 2018 -0500
+
+    Able to read in file
+
+ESC[33mcommit 6757f5b0d897a893cf249af9595a559a92c273adESC[m
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Fri Oct 26 22:25:31 2018 -0500
+
+    Started assignment 1.07
 
