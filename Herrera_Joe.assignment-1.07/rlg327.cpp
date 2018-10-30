@@ -136,7 +136,7 @@ class Monster{
   std::string NAME;
   string DESC;
   vector<string> COLOR;//vector<Colors> COLOR;
-  Dice SPEED;
+  string SPEED;
   vector<string> ABIL; //vector<Abilities> ABIL;
   string HP;//Dice HP;
   string DAM;//Dice DAM;
@@ -159,8 +159,7 @@ void Monster::printMonster(Monster m){
     cout << *it << " ";
   }cout << endl;
 
-  string speed = m.SPEED.printDice();
-  cout << speed << endl;
+  cout << m.SPEED << endl;
   
   //Prints out Abilities
   for(it = m.ABIL.begin(); it != m.ABIL.end(); it++){
@@ -266,28 +265,7 @@ int main(int argc, char *argv[])
 	}
 	else if(s == "SPEED"){
 	  f>>s;//Gets the dice value as a string 
-
-	  Dice d;
-
-	  //Parses the intergers out of the string
-	  stringstream stream(s);
-	  int i=0;
-	  int number;
-	  while (stream >> number){
-	    cout << number<< endl;
-	    switch(i){
-	    case 0: d.base = number; 
-	      break;
-	    case 1: d.dice = number; 
-	      break;
-	    case 2: d.sides = 10;
-	      break;
-	    default: keywordCount = -10;//This is so the moster gets thrown away
-	      break;
-	    }
-	    i++;
-	  }
-	  m.SPEED = d;      
+	  m.SPEED = s;      
 	}
 	else if (s == "ABIL"){
 	  vector<string> a;
