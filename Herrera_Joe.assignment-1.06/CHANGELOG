@@ -1,11 +1,161 @@
-10/20 9:00am:Started Project
+commit e17a992042ad9ef052e0766d64c29d1c666e1075
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Wed Oct 24 10:28:54 2018 -0500
 
+    Implemented teleporting, finished the assignment
 
+commit d25b09533b3c9c87113d68b066bfdcb9b22e3cb6
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Wed Oct 24 08:36:55 2018 -0500
 
+    Fog Of War functionality implemented
 
+commit d21706b416723ed94681b9d2e4d06cd248a1e979
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Tue Oct 23 21:24:38 2018 -0500
 
+    Fixed a nasty double free or corruption bug that occured when the player died
 
+commit 7f93a0a099c70b2e8fdeb56b6ae40a71ef8c0d16
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Tue Oct 23 15:11:36 2018 -0500
 
+    No idea how I was able to get terrain type declared under pc.h, monsters now seem to jump around
 
+commit 673d6a1f764b782df4dc0e77b2e3371727b138ed
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Mon Oct 22 19:45:01 2018 -0500
 
-    
+    Fixed a bug where the player character would turn into weird symbols after using the stairs
+
+commit 9e8f7bdd3c9b852555d4ac8706624ab558373a4a
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Mon Oct 22 18:57:01 2018 -0500
+
+    Completed inheritance for npc
+
+commit 86a9b6430744938437c7638fb867eecf0dc62511
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Mon Oct 22 18:01:15 2018 -0500
+
+    Got the inheritance working correctly for Player Character
+
+commit 3020d5deccdf37f1719677739314347399f8f994
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 20 20:17:15 2018 -0500
+
+    Backup before messing with character's pc and npc
+
+commit 9c202975bda5d7c9141ff79f01195ed6b5167bca
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 20 17:14:55 2018 -0500
+
+    Convert structs to classes
+
+commit 86043eaf7e10585d08755ef4676849399961da41
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 20 17:12:27 2018 -0500
+
+    Convert structs to classes
+
+commit 017e763962cec31ff494b718f7505448a12c094e
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 20 15:53:25 2018 -0500
+
+    Changed character struct to class
+
+commit 69e48676c05d9529ef6a3d75270e093213a690d8
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 20 12:03:55 2018 -0500
+
+    Converted to C++, still using struts
+
+commit 6ddf9c739fb9b0c3786a5cbbf2f4ca2abc939389
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 20 09:07:38 2018 -0500
+
+    Starting assignment 1.06: Fog of War and Porting to C++
+
+commit c8ba4149846c56a29b3ecf664051178d1a72fda1
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Tue Oct 9 13:28:14 2018 -0500
+
+    Arrow keys now work, Project is complete
+
+commit 73e85160f05d577ef716f5d94f1bae292251d146
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 6 22:09:05 2018 -0500
+
+    Cleaned up the project a bit, need to implement arrow keys as an input
+
+commit 450eb7da235cc84cddd791084b3ce969f61e679f
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 6 21:37:37 2018 -0500
+
+    Monster list can now scroll, Assignment is complete
+
+commit a7b5d0130ff5846849762045a8e3bbdcf218c00f
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 6 20:09:20 2018 -0500
+
+    Monster list now works, shows the correct information
+
+commit 5e8808d12b0d87d7874aa16678095bd97738cb7a
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 6 18:37:54 2018 -0500
+
+    Able to print out a window with the text TEST
+
+commit c232b3934dc15871f771e30cc5f3c39452e363e0
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 6 18:02:10 2018 -0500
+
+    Stairs now generate in the map and the player is able to enter these stairs using the right commands
+
+commit 4cc6d132e3330fe986c910cd9a23b0b0e1617064
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 6 16:33:28 2018 -0500
+
+    Additional PC controls were added and PC can now smite monsters
+
+commit 0d0e1eb008c70d3f2724129e4e28ed3a0895d116
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 6 16:03:13 2018 -0500
+
+    Got the pc character to move with respect to rooms and halls
+
+commit 72227142473943e731badb820f431ab85751f72c
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 6 12:26:25 2018 -0500
+
+    Got the map to print out using ncurses
+
+commit 8ed3dfe2429b84034fd09256bcc20ef0ece5b75c
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 6 10:11:59 2018 -0500
+
+    deleting test file
+
+commit 2bd65a3b49044ab515cde1306294e25161d79c49
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 6 10:09:22 2018 -0500
+
+    First commit
+
+commit 1d9c02f2ada23a12c91537953253ab867fb5c189
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 6 09:59:53 2018 -0500
+
+    test file
+
+commit eecf1741e6278168d539751372611b6aeb106a7d
+Author: jherrera98 <42705725+jherrera98@users.noreply.github.com>
+Date:   Sat Oct 6 09:56:13 2018 -0500
+
+    Delete README.md
+
+commit 9ca21f6df03c981fe89ac86d9702126e057d894e
+Author: jherrera98 <jherrera@iastate.edu>
+Date:   Sat Oct 6 09:06:13 2018 -0500
+
+    first commit
