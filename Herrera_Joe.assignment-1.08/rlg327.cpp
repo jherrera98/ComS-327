@@ -87,10 +87,9 @@ int main(int argc, char *argv[])
   char *pgm_file;
 
   parse_descriptions(&d);
-  print_descriptions(&d);
-  destroy_descriptions(&d);
+  //print_descriptions(&d);
 
-  return 0;
+  // return 0;
 
   /* Quiet a false positive from valgrind. */
   memset(&d, 0, sizeof (d));
@@ -269,6 +268,7 @@ int main(int argc, char *argv[])
   }
 
   delete_dungeon(&d);
+  destroy_descriptions(&d);
 
   return 0;
 }

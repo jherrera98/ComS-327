@@ -569,6 +569,9 @@ static void place_stairs(dungeon *d)
   } while (rand_under(2, 4));
 }
 
+
+
+
 static int make_rooms(dungeon *d)
 {
   uint32_t i;
