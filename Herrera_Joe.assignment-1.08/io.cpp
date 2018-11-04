@@ -206,62 +206,6 @@ void io_display(dungeon *d)
   character *c;
   int32_t visible_monsters;
   
-  int element = 0;
-
-
-
-
-
-
-  char tempArr[21][80];
-
- clear();
-  for (y = 0; y < 21; y++) {
-    for (x = 0; x < 80; x++) {
-      if (d->character_map[y][x]) {
-        tempArr[y+1][x] =  d->character_map[y][x]->symbol;
-      } else {
-        switch (mapxy(x, y)) {
-        case ter_wall:
-        case ter_wall_immutable:
-          tempArr[y+1][x] =  ' ';
-          break;
-        case ter_floor:
-        case ter_floor_room:
-          tempArr[y + 1][x] =  '.';
-          break;
-        case ter_floor_hall:
-          tempArr[y + 1][x] =  '#';
-          break;
-        case ter_debug:
-          tempArr[y + 1][x] =  '*';
-          break;
-        case ter_stairs_up:
-          tempArr[y + 1][x] =  '<';
-          break;
-        case ter_stairs_down:
-          tempArr[y + 1][x] =  '>';
-          break;
-	case ter_item:
-	  tempArr[y + 1][x] = d->object_descriptions.at(element).createObject().get_symbol();
-	  element++;
-	  break;
-        default:
- /* Use zero as an error symbol, since it stands out somewhat, and it's *
-  * not otherwise used.                                                 */
-          tempArr[y + 1][x] = '0';
-        }
-      }
-    }
-  }
-
-
-
-
-
-
-
-
   clear();
   for (visible_monsters = -1, y = 0; y < 21; y++) {
     for (x = 0; x < 80; x++) {
@@ -302,7 +246,7 @@ void io_display(dungeon *d)
 	case ter_item:
 	  //mvaddch(y+1, x, d->object_descriptions.at(element).createObject().get_symbol());
 	  //element++;
-	  mvaddch(y+1, x, tempArr[y+1][x]);
+	  mvaddch(y+1, x, d->objectMap[y][x]);
 	  break;
         default:
  /* Use zero as an error symbol, since it stands out somewhat, and it's *
@@ -348,9 +292,6 @@ void io_display_no_fog(dungeon *d)
   uint32_t y, x;
   character *c;
 
-  int element = 0;
-
-
   clear();
   for (y = 0; y < 21; y++) {
     for (x = 0; x < 80; x++) {
@@ -379,8 +320,7 @@ void io_display_no_fog(dungeon *d)
           mvaddch(y + 1, x, '>');
           break;
 	case ter_item:
-	  mvaddch(y+1, x, d->object_descriptions.at(element).createObject().get_symbol());
-	  element++;
+	  mvaddch(y+1, x,  d->objectMap[y][x]);
 	  break;
         default:
  /* Use zero as an error symbol, since it stands out somewhat, and it's *
