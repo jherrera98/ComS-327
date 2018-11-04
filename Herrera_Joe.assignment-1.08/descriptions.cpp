@@ -956,6 +956,7 @@ void gen_objects(dungeon_t *d){
 	    ((mappair(p) > ter_stairs)))); 
     mappair(p) = ter_item;
     d->objectMap[p[dim_y]][p[dim_x]] = d->object_descriptions.at(i).createObject().get_symbol();
+    d->objectColorMap[p[dim_y]][p[dim_x]] = d->object_descriptions.at(i).createObject().get_color();
     i++;
   }
 }

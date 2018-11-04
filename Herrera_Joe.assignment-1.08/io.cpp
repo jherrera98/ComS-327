@@ -84,6 +84,8 @@ static void io_print_message_queue(uint32_t y, uint32_t x)
     attron(COLOR_PAIR(COLOR_CYAN));
     mvprintw(y, x, "%-80s", io_head->msg);
     attroff(COLOR_PAIR(COLOR_CYAN));
+    mvprintw(y, x, "%-80s", io_head->msg);
+    attroff(COLOR_PAIR(COLOR_CYAN));
     io_head = io_head->next;
     if (io_head) {
       attron(COLOR_PAIR(COLOR_CYAN));
@@ -244,9 +246,11 @@ void io_display(dungeon *d)
           mvaddch(y + 1, x, '>');
           break;
 	case ter_item:
-	  //mvaddch(y+1, x, d->object_descriptions.at(element).createObject().get_symbol());
-	  //element++;
-	  mvaddch(y+1, x, d->objectMap[y][x]);
+	  	  
+	  attron(COLOR_PAIR(d->objectColorMap[y][x]));
+	  mvaddch(y+1, x,  d->objectMap[y][x]);
+	  attroff(COLOR_PAIR(d->objectColorMap[y][x]));
+	  
 	  break;
         default:
  /* Use zero as an error symbol, since it stands out somewhat, and it's *
@@ -320,7 +324,11 @@ void io_display_no_fog(dungeon *d)
           mvaddch(y + 1, x, '>');
           break;
 	case ter_item:
+	  
+	  attron(COLOR_PAIR(d->objectColorMap[y][x]));
 	  mvaddch(y+1, x,  d->objectMap[y][x]);
+	  attroff(COLOR_PAIR(d->objectColorMap[y][x]));
+	  
 	  break;
         default:
  /* Use zero as an error symbol, since it stands out somewhat, and it's *
