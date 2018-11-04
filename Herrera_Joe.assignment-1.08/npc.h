@@ -46,9 +46,22 @@ typedef uint32_t npc_characteristics_t;
 
 class npc : public character {
  public:
+  std::string name;
+  std::string description;
+  std::vector<uint32_t> color;
+  uint32_t abilities;
+  int32_t hitpoints;
+  dice damage;
+  uint32_t rarity;
   npc_characteristics_t characteristics;
   uint32_t have_seen_pc;
   pair_t pc_last_known_position;
+ npc(std::string name, std::string description, std::vector<uint32_t> color,
+     uint32_t abilities, int32_t hitpoints, dice damage, uint32_t rarity, char symbol, int32_t spped) :
+  character(symbol, speed),name(name), description(description), color(color), 
+    abilities(abilities), hitpoints (hitpoints),
+    damage(damage), rarity(rarity)
+    {}
 };
 
 void gen_monsters(dungeon *d);

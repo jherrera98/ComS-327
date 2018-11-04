@@ -6,6 +6,7 @@
 # include <vector>
 # include <string>
 # include "dice.h"
+# include "npc.h"
 
 typedef struct dungeon dungeon_t;
 
@@ -38,6 +39,7 @@ typedef enum object_type {
 
 extern const char object_symbol[];
 
+
 class monster_description {
  private:
   std::string name, description;
@@ -63,10 +65,17 @@ class monster_description {
            const uint32_t rarity);
   std::ostream &print(std::ostream &o);
   char get_symbol() { return symbol; }
+
+  npc createMonster(){
+    
+    npc monster(name, description, color, abilities, hitpoints.roll(), damage, 
+		rarity, symbol, speed.roll());
+    return monster;
+  }
 };
 
 
-
+//New object class for the init of object_description
 class object{
  private:
   std::string name, description;
