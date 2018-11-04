@@ -13,6 +13,7 @@ typedef struct dungeon dungeon_t;
 uint32_t parse_descriptions(dungeon_t *d);
 uint32_t print_descriptions(dungeon_t *d);
 uint32_t destroy_descriptions(dungeon_t *d);
+void gen_objects(dungeon_t *d);
 
 typedef enum object_type {
   objtype_no_type,
@@ -91,17 +92,18 @@ class object{
   int32_t value;
   bool artifact;
   uint32_t rarity;
+  char symbol;
 
  public:
  object(std::string name, std::string description, object_type_t type,
 	uint32_t color, int32_t hit, dice damage, int32_t dodge,
 	int32_t defence, int32_t weight, int32_t speed, int32_t attribute,
-	int32_t value, bool artifact, uint32_t rarity) 
+	int32_t value, bool artifact, uint32_t rarity)
    : name(name),    description(description), type(type),
     color(color),  hit(hit),         damage(damage),
     dodge(dodge),   defence(defence),     weight(weight),
     speed(speed),   attribute(attribute),   value(value),
-    artifact(artifact), rarity(rarity)
+    artifact(artifact), rarity(rarity), symbol(convertToSymbol(type))
     {
     }
   void set(const std::string &name,
@@ -133,6 +135,55 @@ class object{
   inline const int32_t get_speed() const { return speed; }
   inline const int32_t get_attribute() const { return attribute; }
   inline const int32_t get_value() const { return value; }
+  inline const char get_symbol() const { return symbol;}
+  inline const char convertToSymbol(object_type_t t) const {
+    char s;
+    switch(t){
+    case objtype_WEAPON:
+      s = '|'; break;
+    case objtype_OFFHAND:
+      s = ')'; break;
+    case objtype_RANGED:
+      s = '}'; break;
+    case objtype_LIGHT:
+      s = '_'; break;
+    case objtype_ARMOR:
+      s = '['; break;
+    case objtype_HELMET:
+      s = ']'; break;
+    case objtype_CLOAK:
+      s = '('; break;
+    case objtype_GLOVES:
+      s = '{'; break;
+    case objtype_BOOTS:
+      s = '\\'; break;
+    case objtype_AMULET:
+      s = '"'; break;
+    case objtype_RING:
+      s = '='; break;
+    case objtype_SCROLL:
+      s = '~'; break;
+    case objtype_BOOK:
+      s = '?'; break;
+    case objtype_FLASK:
+      s = '!'; break;
+    case objtype_GOLD:
+      s = '$'; break;
+    case objtype_AMMUNITION:
+      s = '/'; break;
+    case objtype_FOOD:
+      s = ','; break;
+    case objtype_WAND:
+      s = '-'; break;
+    case objtype_CONTAINER:
+      s = '%'; break;
+    case objtype_no_type:
+      s = '*'; break;
+    default:
+      s = '*';break;
+    }
+    return s;
+  }
 };
 
 class object_description {

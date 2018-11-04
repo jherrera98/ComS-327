@@ -86,13 +86,16 @@ int main(int argc, char *argv[])
   char *load_file;
   char *pgm_file;
 
+
+  memset(&d, 0, sizeof (d));
+  
   parse_descriptions(&d);
   //print_descriptions(&d);
 
   // return 0;
 
   /* Quiet a false positive from valgrind. */
-  memset(&d, 0, sizeof (d));
+  // memset(&d, 0, sizeof (d));
   
   /* Default behavior: Seed with the time, generate a new dungeon, *
    * and don't write to disk.                                      */
@@ -218,6 +221,7 @@ int main(int argc, char *argv[])
   /* Ignoring PC position in saved dungeons.  Not a bug. */
   config_pc(&d);
   gen_monsters(&d);
+  gen_objects(&d);
 
   io_display(&d);
   if (!do_load && !do_image) {

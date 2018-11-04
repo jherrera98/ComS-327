@@ -539,6 +539,8 @@ static uint32_t parse_monster_description(std::ifstream &f,
   m.set(name, desc, symb, color, speed, abil, hp, dam, rrty);
   v->push_back(m);
 
+
+
   return 0;
 }
 
@@ -813,6 +815,10 @@ static uint32_t parse_object_description(std::ifstream &f,
         def, weight, speed, attr, val, art, rrty);
   v->push_back(o);
 
+  object newObject = o.createObject();
+
+  //add the newObject to the dungeon 
+  
   return 0;
 }
 
@@ -927,12 +933,32 @@ uint32_t print_descriptions(dungeon_t *d)
   }
 
 
+  
   for (oi = o.begin(); oi != o.end(); oi++) {
     std::cout << *oi << std::endl;
   }
 
   return 0;
 }
+
+void gen_objects(dungeon_t *d){
+  //std::vector<object_description> &o = d->object_descriptions;
+  //std::vector<object_description>::iterator oi;
+  
+  //Places random object terrians for the objects to be placed
+  int i = 0;
+  int size = 10;
+  while(i < size){
+    pair_t p;
+    while ((p[dim_y] = rand_range(1, DUNGEON_Y - 2)) &&
+	   (p[dim_x] = rand_range(1, DUNGEON_X - 2)) &&
+	   ((mappair(p) < ter_floor)                 ||
+	    ((mappair(p) > ter_stairs)))); 
+    mappair(p) = ter_item;
+    i++;
+  }
+}
+
 
 void monster_description::set(const std::string &name,
                               const std::string &description,
