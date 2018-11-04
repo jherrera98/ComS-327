@@ -29,7 +29,7 @@ void place_pc(dungeon *d)
 
 void config_pc(dungeon *d)
 {
-  d->PC = new pc;
+  d->PC = new pc('@', PC_SPEED);
 
   memset(d->PC, 0, sizeof (*d->PC));
   d->PC->symbol = '@';

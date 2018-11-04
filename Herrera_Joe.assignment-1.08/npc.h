@@ -2,9 +2,12 @@
 # define NPC_H
 
 # include <stdint.h>
+# include <string>
+# include <vector>
 
 # include "dims.h"
 # include "character.h"
+# include "dice.h"
 
 # define NPC_SMART         0x00000001
 # define NPC_TELEPATH      0x00000002
@@ -57,7 +60,7 @@ class npc : public character {
   uint32_t have_seen_pc;
   pair_t pc_last_known_position;
  npc(std::string name, std::string description, std::vector<uint32_t> color,
-     uint32_t abilities, int32_t hitpoints, dice damage, uint32_t rarity, char symbol, int32_t spped) :
+     uint32_t abilities, int32_t hitpoints, dice damage, uint32_t rarity, char symbol, int32_t speed) :
   character(symbol, speed),name(name), description(description), color(color), 
     abilities(abilities), hitpoints (hitpoints),
     damage(damage), rarity(rarity)

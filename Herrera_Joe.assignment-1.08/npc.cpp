@@ -36,54 +36,19 @@ void gen_monsters(dungeon *d)
   num_cells = max_monster_cells(d);
   d->num_monsters = d->max_monsters < num_cells ? d->max_monsters : num_cells;
 
-  for (i = 0; i < d->num_monsters; i++) {
-    m = new npc;
-    memset(m, 0, sizeof (*m));
-    
-    do {
-      room = rand_range(1, d->num_rooms - 1);
-      p[dim_y] = rand_range(d->rooms[room].position[dim_y],
-                            (d->rooms[room].position[dim_y] +
-                             d->rooms[room].size[dim_y] - 1));
-      p[dim_x] = rand_range(d->rooms[room].position[dim_x],
-                            (d->rooms[room].position[dim_x] +
-                             d->rooms[room].size[dim_x] - 1));
-    } while (d->character_map[p[dim_y]][p[dim_x]]);
-    m->position[dim_y] = p[dim_y];
-    m->position[dim_x] = p[dim_x];
-    d->character_map[p[dim_y]][p[dim_x]] = m;
-    m->speed = rand_range(5, 20);
-    m->alive = 1;
-    m->sequence_number = ++d->character_sequence_number;
-    m->characteristics = rand() & 0x0000000f;
-    /*    m->npc->characteristics = 0xf;*/
-    m->symbol = symbol[m->characteristics];
-    m->have_seen_pc = 0;
-    m->kills[kill_direct] = m->kills[kill_avenged] = 0;
-
-    d->character_map[p[dim_y]][p[dim_x]] = m;
-
-    heap_insert(&d->events, new_event(d, event_characterurn, m, 0));
-  }
-}
-
-
-
-//Fixed this to created monsters based on file
-void gen_monsters_from_desc(dungeon *d)
-{
-  uint32_t i;
-  npc *m;
-  uint32_t room;
-  pair_t p;
-  const static char symbol[] = "0123456789abcdef";
-  uint32_t num_cells;
-
-  num_cells = max_monster_cells(d);
-  d->num_monsters = d->max_monsters < num_cells ? d->max_monsters : num_cells;
+  //Dummy variables for testing monster gen
+  std::string name = "NAME";
+  std::string desc = "DESC";
+  std::vector<uint32_t> color;
+  color.push_back(0);
+  int32_t abilities = 0;
+  int32_t hitpoints = 0;
+  dice damage(12,2,6);
+  uint32_t rarity = 0;
 
   for (i = 0; i < d->num_monsters; i++) {
-    m = new npc;
+    m = new npc(name, desc, color, abilities, hitpoints, damage, rarity, '*',
+		rand_range(5, 20));
     memset(m, 0, sizeof (*m));
     
     do {
