@@ -69,9 +69,13 @@ class monster_description {
 
   npc createMonster(){
     
-    npc monster(name, description, color, abilities, hitpoints.roll(), damage, 
+    npc monster(name, description, extractColor(color), abilities, hitpoints.roll(), damage, 
 		rarity, symbol, speed.roll());
     return monster;
+  }
+  uint32_t extractColor(std::vector<uint32_t> colors){
+    uint32_t color = colors.at(0);
+    return color;
   }
 };
 

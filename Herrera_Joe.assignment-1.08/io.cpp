@@ -217,11 +217,17 @@ void io_display(dungeon *d)
       if (d->character_map[y][x] &&
           can_see(d,
                   character_get_pos(d->PC),
-                  character_get_pos(d->character_map[y][x]),
-                  1, 0)) {
-        mvaddch(y + 1, x,
-                character_get_symbol(d->character_map[y][x]));
-        visible_monsters++;
+                  character_get_pos(d->character_map[y][x]),         
+		  1, 0)) {
+	
+	//npc *temp = (d->character_map[y][x]); 
+	//attron(COLOR_PAIR(temp->color));
+	mvaddch(y + 1, x,character_get_symbol(d->character_map[y][x]));
+	//attroff(COLOR_PAIR(temp->color));
+	visible_monsters++;
+	
+
+
       } else {
         switch (pc_learned_terrain(d->PC, y, x)) {
         case ter_wall:
