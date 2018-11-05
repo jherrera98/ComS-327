@@ -219,11 +219,10 @@ void io_display(dungeon *d)
                   character_get_pos(d->PC),
                   character_get_pos(d->character_map[y][x]),         
 		  1, 0)) {
-	
-	//npc *temp = (d->character_map[y][x]); 
-	//attron(COLOR_PAIR(temp->color));
+        
+	attron(COLOR_PAIR(character_get_color(d->character_map[y][x])));
 	mvaddch(y + 1, x,character_get_symbol(d->character_map[y][x]));
-	//attroff(COLOR_PAIR(temp->color));
+	attroff(COLOR_PAIR(character_get_color(d->character_map[y][x])));
 	visible_monsters++;
 	
 
@@ -306,7 +305,10 @@ void io_display_no_fog(dungeon *d)
   for (y = 0; y < 21; y++) {
     for (x = 0; x < 80; x++) {
       if (d->character_map[y][x]) {
-        mvaddch(y + 1, x, d->character_map[y][x]->symbol);
+        
+	attron(COLOR_PAIR(character_get_color(d->character_map[y][x])));
+	mvaddch(y + 1, x,character_get_symbol(d->character_map[y][x]));
+	attroff(COLOR_PAIR(character_get_color(d->character_map[y][x])));
       } else {
         switch (mapxy(x, y)) {
         case ter_wall:

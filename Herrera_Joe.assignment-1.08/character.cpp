@@ -56,6 +56,12 @@ uint32_t character_get_speed(const character *c)
   return c->speed;
 }
 
+
+uint32_t character_get_color(const character *c)
+{
+  return c->color;
+}
+
 uint32_t character_get_dkills(const character *c)
 {
   return c->kills[kill_direct];

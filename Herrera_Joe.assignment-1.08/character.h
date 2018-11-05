@@ -13,6 +13,7 @@ typedef enum kill_type {
 
 class character {
  public:
+  uint32_t color;
   char symbol;
   pair_t position;
   int32_t speed;
@@ -26,7 +27,7 @@ class character {
    * characters have been created by the game.                              */
   uint32_t sequence_number;
   uint32_t kills[num_kill_types];
- character(char symbol, int32_t speed) : symbol(symbol), speed(speed)
+ character(uint32_t color, char symbol, int32_t speed) : color(color), symbol(symbol), speed(speed)
   {}
 };
 
@@ -53,5 +54,6 @@ uint32_t character_get_dkills(const character *c);
 uint32_t character_get_ikills(const character *c);
 uint32_t character_increment_dkills(character *c);
 uint32_t character_increment_ikills(character *c, uint32_t k);
+uint32_t character_get_color(const character *c);
 
 #endif

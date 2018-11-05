@@ -53,8 +53,8 @@ void gen_monsters(dungeon *d)
   for (i = 0; i < d->num_monsters; i++) {
     npc monster = d->monster_descriptions.at(i).createMonster();
     //memset(m, 0, sizeof (*m));
-    m = new npc(monster.name, monster.description, monster.color, monster.abilities, monster.hitpoints,
-    		monster.damage, monster.rarity, monster.symbol,
+    m = new npc(monster.name, monster.description, monster.abilities, monster.hitpoints,
+    		monster.damage, monster.rarity,monster.color, monster.symbol,
     		1);
 
     //put the monster.speed in the creation of monster above, it is 1 for dubugging purposes
