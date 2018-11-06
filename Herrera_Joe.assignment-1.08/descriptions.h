@@ -144,6 +144,7 @@ class object{
   inline const int32_t get_attribute() const { return attribute; }
   inline const int32_t get_value() const { return value; }
   inline const char get_symbol() const { return symbol;}
+  inline const uint32_t get_rarity() const{return rarity;}
   inline const char convertToSymbol(object_type_t t) const {
     char s;
     switch(t){

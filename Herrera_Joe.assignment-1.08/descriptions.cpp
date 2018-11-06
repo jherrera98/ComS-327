@@ -946,18 +946,30 @@ void gen_objects(dungeon_t *d){
   //std::vector<object_description>::iterator oi;
   
   //Places random object terrians for the objects to be placed
-  int i = 0;
-  int size = 10;
-  while(i < size){
-    pair_t p;
-    while ((p[dim_y] = rand_range(1, DUNGEON_Y - 2)) &&
-	   (p[dim_x] = rand_range(1, DUNGEON_X - 2)) &&
-	   ((mappair(p) < ter_floor)                 ||
-	    ((mappair(p) > ter_stairs)))); 
-    mappair(p) = ter_item;
-    d->objectMap[p[dim_y]][p[dim_x]] = d->object_descriptions.at(i).createObject().get_symbol();
-    d->objectColorMap[p[dim_y]][p[dim_x]] = d->object_descriptions.at(i).createObject().get_color();
-    i++;
+  uint32_t i = 0;
+  uint32_t numberOfObjectsToGenerate = 10;
+  uint32_t indexOfObjects = 0;
+  while(i < numberOfObjectsToGenerate){
+    object o = d->object_descriptions.at(indexOfObjects).createObject();
+    
+    if (o.get_rarity() > (unsigned)(rand()%100)){
+      pair_t p;
+      while ((p[dim_y] = rand_range(1, DUNGEON_Y - 2)) &&
+	     (p[dim_x] = rand_range(1, DUNGEON_X - 2)) &&
+	     ((mappair(p) < ter_floor)                 ||
+	      ((mappair(p) > ter_stairs)))); 
+      mappair(p) = ter_item;
+      d->objectMap[p[dim_y]][p[dim_x]] = o.get_symbol();
+      d->objectColorMap[p[dim_y]][p[dim_x]] = o.get_color();
+      i++;
+    }
+
+    indexOfObjects++;
+
+    if(indexOfObjects >= d->object_descriptions.size())
+      {
+	indexOfObjects = 0;
+      }
   }
 }
 
