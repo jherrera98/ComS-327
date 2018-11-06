@@ -66,7 +66,8 @@ class monster_description {
            const uint32_t rarity);
   std::ostream &print(std::ostream &o);
   char get_symbol() { return symbol; }
-
+  uint32_t get_rarity() { return rarity;}
+  std::string get_name(){return name;}
   npc createMonster(){
     
     npc monster(name, description, abilities, hitpoints.roll(), damage, 
@@ -76,6 +77,9 @@ class monster_description {
   uint32_t extractColor(std::vector<uint32_t> colors){
     uint32_t color = colors.at(0);
     return color;
+  }
+  void set_rarity(uint32_t r) {
+    rarity = r;
   }
 };
 

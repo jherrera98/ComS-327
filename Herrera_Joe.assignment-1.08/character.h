@@ -27,7 +27,7 @@ class character {
    * characters have been created by the game.                              */
   uint32_t sequence_number;
   uint32_t kills[num_kill_types];
- character(uint32_t color, char symbol, int32_t speed) : color(color), symbol(symbol), speed(speed)
+ character( uint32_t color, char symbol, int32_t speed) : color(color), symbol(symbol), speed(speed)
   {}
 };
 

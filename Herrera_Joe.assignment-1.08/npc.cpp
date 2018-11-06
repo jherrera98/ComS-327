@@ -30,64 +30,54 @@ void gen_monsters(dungeon *d)
   npc *m;
   uint32_t room;
   pair_t p;
-  //const static char symbol[] = "0123456789abcdef";
   uint32_t num_cells;
 
   num_cells = max_monster_cells(d);
   d->num_monsters = d->max_monsters < num_cells ? d->max_monsters : num_cells;
 
   //Dummy variables for testing monster gen
-  std::string name = "NAME";
-  std::string desc = "DESC";
-  std::vector<uint32_t> color;
-  color.push_back(0);
-  //int32_t abilities = 0;
-  //int32_t hitpoints = 0;
-  dice damage(12,2,6);
-  //uint32_t rarity = 0;
-  //d->num_monsters
-  //d->monster_descriptions.size()
+  //std::string name = "NAME";
+  //std::string desc = "DESC";
+  //std::vector<uint32_t> color;
+  //color.push_back(0);
   
   d->num_monsters  = d->monster_descriptions.size();
-
+  int numberOfSpawned = 0;
   for (i = 0; i < d->num_monsters; i++) {
     npc monster = d->monster_descriptions.at(i).createMonster();
-    //memset(m, 0, sizeof (*m));
-    m = new npc(monster.name, monster.description, monster.abilities, monster.hitpoints,
-    		monster.damage, monster.rarity,monster.color, monster.symbol,
-    		1);
 
-    //put the monster.speed in the creation of monster above, it is 1 for dubugging purposes
+    //Checks to see if the monster has been killed already
+    if ((monster.rarity != 1000) && (monster.rarity > (unsigned)(rand()%100))){
+      numberOfSpawned++;
+      m = new npc(monster.name, monster.description, monster.abilities, monster.hitpoints,
+		  monster.damage, monster.rarity,monster.color, monster.symbol,
+		  /*monster.speed*/1);
     
-    //memset(m, 0, sizeof (*m));
-    //m = &monster;
-    
-    
-    do {
-      room = rand_range(1, d->num_rooms - 1);
-      p[dim_y] = rand_range(d->rooms[room].position[dim_y],
+      do {
+	room = rand_range(1, d->num_rooms - 1);
+	p[dim_y] = rand_range(d->rooms[room].position[dim_y],
                             (d->rooms[room].position[dim_y] +
                              d->rooms[room].size[dim_y] - 1));
-      p[dim_x] = rand_range(d->rooms[room].position[dim_x],
-                            (d->rooms[room].position[dim_x] +
-                             d->rooms[room].size[dim_x] - 1));
-    } while (d->character_map[p[dim_y]][p[dim_x]]);
-    m->position[dim_y] = p[dim_y];
-    m->position[dim_x] = p[dim_x];
-    d->character_map[p[dim_y]][p[dim_x]] = m;
-    //m->speed = rand_range(5, 20);
-    m->alive = 1;
-    m->sequence_number = ++d->character_sequence_number;
-    m->characteristics = rand() & 0x0000000f; // make a converstion from abilities tp characteristics
-    /*    m->npc->characteristics = 0xf;*/
-    //m->symbol = symbol[m->characteristics];
-    m->have_seen_pc = 0;
-    m->kills[kill_direct] = m->kills[kill_avenged] = 0;
-
-    d->character_map[p[dim_y]][p[dim_x]] = m;
-
-    heap_insert(&d->events, new_event(d, event_characterurn, m, 0));
+	p[dim_x] = rand_range(d->rooms[room].position[dim_x],
+			      (d->rooms[room].position[dim_x] +
+			       d->rooms[room].size[dim_x] - 1));
+      } while (d->character_map[p[dim_y]][p[dim_x]]);
+      m->position[dim_y] = p[dim_y];
+      m->position[dim_x] = p[dim_x];
+      d->character_map[p[dim_y]][p[dim_x]] = m;
+      m->alive = 1;
+      m->sequence_number = ++d->character_sequence_number;
+      m->characteristics = monster.abilities;
+      m->have_seen_pc = 0;
+      m->kills[kill_direct] = m->kills[kill_avenged] = 0;
+      
+      d->character_map[p[dim_y]][p[dim_x]] = m;
+      
+      heap_insert(&d->events, new_event(d, event_characterurn, m, 0));
+    }
   }
+  d->num_monsters = numberOfSpawned;
+  
 }
 
 void npc_next_pos_rand_tunnel(dungeon *d, npc *c, pair_t next)

@@ -58,6 +58,18 @@ void do_combat(dungeon *d, character *atk, character *def)
     
     if (def != d->PC) {
       d->num_monsters--;
+
+      
+      
+      //Delete this monster from description by matching it up with the symbol and then setting rarity to 1000
+	uint8_t i;
+	for (i =0; i < d->monster_descriptions.size(); i++) {
+	  if(def->symbol == (d->monster_descriptions.at(i).get_symbol())){
+	    d->monster_descriptions.at(i).set_rarity(1000);
+	  }
+	}
+
+
     } else {
       if ((part = rand() % (sizeof (organs) / sizeof (organs[0]))) < 26) {
         io_queue_message("As the %c eats your %s, "
