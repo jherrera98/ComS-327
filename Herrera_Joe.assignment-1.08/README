@@ -1,3 +1,5 @@
 Assignment 1.08: Loading Monsters and Objects
 Includes: description_files, images, test_dungeon_files, CHANGELOG, character.cpp/h, descriptions.cpp/h, dice.cpp/h, dims.h, dungeon.cpp/h, event.cpp/h, heap.c/h, io.cpp/h, macros.h, Makefile, move.cpp/h, npc.cpp/h, path.cpp/h, pc.cpp/h, README, rlg327.cpp, and utils.cpp/h
-Description: Built off of Jeremy Sheaffer's code from assignment 1.07
+Description: Built off of Jeremy Sheaffer's code from assignment 1.07. The objective of this assignment was to generate the monsters and objects based on the description_files. I fully implemented generation of objects based on rarity. 
+	     These objects are randomly placed on the terrian floor and halls in color. The monsters are also generated based on rarity and placed in the dungeon. Each monster is generated with the color that was stored in the first 
+	     index of the color vector. If a monster were to die, they will not be generated again for the rest of the game. When a player goes up or down the stairs, new monsters are generated, but not the ones that have been killed.

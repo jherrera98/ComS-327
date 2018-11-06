@@ -34,12 +34,6 @@ void gen_monsters(dungeon *d)
 
   num_cells = max_monster_cells(d);
   d->num_monsters = d->max_monsters < num_cells ? d->max_monsters : num_cells;
-
-  //Dummy variables for testing monster gen
-  //std::string name = "NAME";
-  //std::string desc = "DESC";
-  //std::vector<uint32_t> color;
-  //color.push_back(0);
   
   d->num_monsters  = d->monster_descriptions.size();
   int numberOfSpawned = 0;
@@ -51,7 +45,7 @@ void gen_monsters(dungeon *d)
       numberOfSpawned++;
       m = new npc(monster.name, monster.description, monster.abilities, monster.hitpoints,
 		  monster.damage, monster.rarity,monster.color, monster.symbol,
-		  /*monster.speed*/1);
+		  monster.speed);
     
       do {
 	room = rand_range(1, d->num_rooms - 1);

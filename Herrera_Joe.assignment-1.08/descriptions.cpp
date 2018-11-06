@@ -942,8 +942,6 @@ uint32_t print_descriptions(dungeon_t *d)
 }
 
 void gen_objects(dungeon_t *d){
-  //std::vector<object_description> &o = d->object_descriptions;
-  //std::vector<object_description>::iterator oi;
   
   //Places random object terrians for the objects to be placed
   uint32_t i = 0;
