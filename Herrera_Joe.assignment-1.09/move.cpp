@@ -53,7 +53,14 @@ void do_combat(dungeon *d, character *atk, character *def)
   };
   int part;
 
-  if (def->alive) {
+  int32_t damageToBeDone = atk->damage->roll();
+
+  def->hp = def->hp - damageToBeDone;
+
+
+  
+  //def's health has fallen below 0
+  if (def->hp < 0/* && def != d->PC*/) {
     def->alive = 0;
     charpair(def->position) = NULL;
     
@@ -84,9 +91,14 @@ void do_combat(dungeon *d, character *atk, character *def)
                                   def->kills[kill_avenged]);
   }
 
-  if (atk == d->PC) {
+  //if the monster has been killed by the player
+  if (atk == d->PC && def->alive == 0) {
     io_queue_message("You smite %s%s!", is_unique(def) ? "" : "the ", def->name);
   }
+  else if (atk == d->PC)
+    {
+      io_queue_message("You damaged %s%s! Remaining hp: %d", is_unique(def) ? "" : "the ", def->name, def->hp);
+    }
 
   can_see_atk = can_see(d, character_get_pos(d->PC),
                         character_get_pos(atk), 1, 0);
