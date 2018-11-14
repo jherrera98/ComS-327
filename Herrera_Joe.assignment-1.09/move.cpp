@@ -53,6 +53,60 @@ void do_combat(dungeon *d, character *atk, character *def)
   };
   int part;
 
+  //if there is no pc attacking or defending
+  //Attempts to move the attacker to any neighboring open
+  //space, if none are found the attacker swaps positions with 
+  //the defender
+  if (atk != d->PC && def != d->PC)
+    {
+      int x = atk->position[dim_x];
+      int y = atk->position[dim_y];
+      
+      if(!(mapxy(x+1,y))){
+	atk->position[dim_x] = x+1; 
+      	atk->position[dim_y] = y;
+      }
+      else if (!(mapxy(x+1,y+1))){
+	atk->position[dim_x] = x+1; 
+      	atk->position[dim_y] = y+1;
+      }
+      else if (!(mapxy(x,y+1))){
+	atk->position[dim_x] = x; 
+      	atk->position[dim_y] = y+1;
+      }
+      else if (!(mapxy(x-1,y+1))){
+	atk->position[dim_x] = x-1; 
+      	atk->position[dim_y] = y+1;
+      }
+      else if (!(mapxy(x-1,y))){
+	atk->position[dim_x] = x-1; 
+      	atk->position[dim_y] = y;
+      }
+      else if (!(mapxy(x-1,y-1))){
+	atk->position[dim_x] = x-1; 
+      	atk->position[dim_y] = y-1;
+      }
+      else if (!(mapxy(x,y-1))){
+	atk->position[dim_x] = x; 
+      	atk->position[dim_y] = y-1;
+      }
+      else if (!(mapxy(x+1,y-1))){
+	atk->position[dim_x] = x+1; 
+      	atk->position[dim_y] = y-1;
+      }
+      else{//swap
+
+	d->character_map[atk->position[dim_y]][atk->position[dim_x]] = def;
+	atk->position[dim_x] = def->position[dim_x];
+	atk->position[dim_y] = def->position[dim_y];
+	d->character_map[def->position[dim_y]][def->position[dim_x]] = atk;
+
+	def->position[dim_x] = x;
+	def->position[dim_y] = y;
+      }
+      return;
+    }
+
   int32_t damageToBeDone = atk->damage->roll();
 
   def->hp = def->hp - damageToBeDone;
@@ -60,7 +114,7 @@ void do_combat(dungeon *d, character *atk, character *def)
 
   
   //def's health has fallen below 0
-  if (def->hp < 0/* && def != d->PC*/) {
+  if (def->hp < 0 && def != d->PC) {
     def->alive = 0;
     charpair(def->position) = NULL;
     
@@ -94,6 +148,9 @@ void do_combat(dungeon *d, character *atk, character *def)
   //if the monster has been killed by the player
   if (atk == d->PC && def->alive == 0) {
     io_queue_message("You smite %s%s!", is_unique(def) ? "" : "the ", def->name);
+    if(dynamic_cast<npc*>(def)->characteristics == NPC_BOSS){
+      d->defeatedBoss = 1;
+    }
   }
   else if (atk == d->PC)
     {

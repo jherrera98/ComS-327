@@ -95,6 +95,7 @@ class dungeon {
   uint32_t time;
   uint32_t is_new;
   uint32_t quit;
+  uint32_t defeatedBoss;
   std::vector<monster_description> monster_descriptions;
   std::vector<object_description> object_descriptions;
 };
