@@ -326,6 +326,12 @@ uint32_t move_pc(dungeon *d, uint32_t dir)
 
   if ((dir != '>') && (dir != '<') && (mappair(next) >= ter_floor)) {
     move_character(d, d->PC, next);
+
+    //makes the item dissapear
+    if(objpair(next)){
+      objpair(next) = 0;
+    }
+
     dijkstra(d);
     dijkstra_tunnel(d);
 

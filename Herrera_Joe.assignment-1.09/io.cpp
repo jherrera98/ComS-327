@@ -803,7 +803,7 @@ static void io_list_monsters_display(dungeon *d,
      * Tried supressing the warning by taking the ints mod 100, but    *
      * GCC wasn't smart enough for that, so using a pragma instead.    */
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wformat-truncation"
+#pragma GCC diagnostic ignored "-Wformat"
     snprintf(s[i], 60, "%40s%2d %s by %2d %s", tmp,
              abs(character_get_y(c[i]) - character_get_y(d->PC)),
              ((character_get_y(c[i]) - character_get_y(d->PC)) <= 0 ?
