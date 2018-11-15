@@ -1,3 +1,11 @@
-Assignment 1.08: Loading Monsters and Objects
+Assignment 1.09: PC Equipment and Updated Combat 
 Includes: description_files, images, test_dungeon_files, CHANGELOG, character.cpp/h, descriptions.cpp/h, dice.cpp/h, dims.h, dungeon.cpp/h, event.cpp/h, heap.c/h, io.cpp/h, macros.h, Makefile, move.cpp/h, npc.cpp/h, object.cpp/h, path.cpp/h, pc.cpp/h, README, rlg327.cpp, and utils.cpp/h
-Description: Built off of Jeremy Sheaffer's code from assignment 1.08.
+Description: Built off of Jeremy Sheaffer's code from assignment 1.08. For this assignment we had to make it possible to pick up
+	     equipment from the dungeon floor and equip/use it. We also had to update the combat system so that the player and 
+	     monsters to now do damaged based on their damage dice roll. I implemented the functionality of the equipment/objects on
+	     the floor to dissapear only when the player goes over it. I didn't get to implement the functionality of these objects.
+	     I also updated the combat in the game to be based on the damage roll and updated the movement of the monsters so when 
+	     a monster tries to move into a space that is occupied by another monster, it will find a surround open cell to move to, if
+	     there is no other open cell then the monster swaps positions with the other monster. The game also ends only when a monster
+	     with the tag of a BOSS is killed by the PC. Monsters cannot harm other monsters. I also added a feature when the player does
+	     damage to a monster, it will show at the top of the dungeon how much remaining health this monster has.

@@ -114,7 +114,7 @@ void do_combat(dungeon *d, character *atk, character *def)
 
   
   //def's health has fallen below 0
-  if (def->hp < 0 && def != d->PC) {
+  if (def->hp < 0 /*&& def != d->PC*/) {
     def->alive = 0;
     charpair(def->position) = NULL;
     
@@ -148,7 +148,9 @@ void do_combat(dungeon *d, character *atk, character *def)
   //if the monster has been killed by the player
   if (atk == d->PC && def->alive == 0) {
     io_queue_message("You smite %s%s!", is_unique(def) ? "" : "the ", def->name);
-    if(dynamic_cast<npc*>(def)->characteristics == NPC_BOSS){
+    
+    //Checks to see if this def monster has a tag of BOSS, prints win if true
+    if((dynamic_cast<npc*>(def)->characteristics & 0x00000100) == NPC_BOSS){
       d->defeatedBoss = 1;
     }
   }
