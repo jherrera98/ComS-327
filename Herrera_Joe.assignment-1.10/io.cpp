@@ -263,6 +263,12 @@ static void io_redisplay_visible_monsters(dungeon *d, pair_t cursor)
           mvaddch(d->PC->position[dim_y] + pos[dim_y] + 1,
                   d->PC->position[dim_x] + pos[dim_x], '>');
           break;
+	case ter_lava:
+	  attron(COLOR_PAIR(COLOR_RED));
+	  mvaddch(d->PC->position[dim_y] + pos[dim_y] + 1,
+                  d->PC->position[dim_x] + pos[dim_x], '%');
+	  attroff(COLOR_PAIR(COLOR_RED));
+	  break;
         default:
  /* Use zero as an error symbol, since it stands out somewhat, and it's *
   * not otherwise used.                                                 */
@@ -388,6 +394,11 @@ void io_display(dungeon *d)
         case ter_stairs_down:
           mvaddch(pos[dim_y] + 1, pos[dim_x], '>');
           break;
+	case ter_lava:
+	  attron(COLOR_PAIR(COLOR_RED));
+	  mvaddch(pos[dim_y] + 1, pos[dim_x], '%');//this is for lava
+	  attroff(COLOR_PAIR(COLOR_RED));
+	  break;
         default:
  /* Use zero as an error symbol, since it stands out somewhat, and it's *
   * not otherwise used.                                                 */
@@ -500,7 +511,12 @@ void io_display_no_fog(dungeon *d)
           break;
         case ter_stairs_down:
           mvaddch(y + 1, x, '>');
-          break;
+	  break;
+	case ter_lava:
+	  attron(COLOR_PAIR(COLOR_RED));
+	  mvaddch(y+1, x, '%');//this is for lava
+	  attroff(COLOR_PAIR(COLOR_RED));
+	  break;
         default:
  /* Use zero as an error symbol, since it stands out somewhat, and it's *
   * not otherwise used.                                                 */
