@@ -103,8 +103,8 @@ void do_combat(dungeon *d, character *atk, character *def)
           damage += d->PC->eq[i]->roll_dice();
         }
       }
-      io_queue_message("You hit %s%s for %d.", is_unique(def) ? "" : "the ",
-                       def->name, damage);
+      io_queue_message("You hit %s%s for %d. Remaining HP: %d", is_unique(def) ? "" : "the ",
+                       def->name, damage, def->hp);
     }
 
     if (damage >= def->hp) {
