@@ -37,7 +37,8 @@ pc::pc()
     in[i] = 0;
   }
 
-  hp = 1000;
+  hp = maxHp = 1000;
+  
 }
 
 pc::~pc()
@@ -96,7 +97,7 @@ void config_pc(dungeon *d)
   d->PC->color.push_back(COLOR_WHITE);
   d->PC->damage = &pc_dice;
   d->PC->name = "Isabella Garcia-Shapiro";
-
+  
   d->character_map[character_get_y(d->PC)][character_get_x(d->PC)] = d->PC;
 
   dijkstra(d);

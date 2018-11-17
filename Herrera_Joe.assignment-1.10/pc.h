@@ -26,6 +26,8 @@ typedef enum eq_slot {
 extern const char *eq_slot_name[num_eq_slots];
 
 class pc : public character {
+ public: 
+  uint32_t maxHp;
  private:
   void recalculate_speed();
   uint32_t has_open_inventory_slot();

@@ -1,4 +1,5 @@
 Assignment 1.10: Choose Your Own Assignment
 Includes: description_files, images, test_dungeon_files, CHANGELOG, character.cpp/h, descriptions.cpp/h, dice.cpp/h, dims.h, dungeon.cpp/h, event.cpp/h, heap.c/h, io.cpp/h, macros.h, Makefile, move.cpp/h, npc.cpp/h, object.cpp/h, path.cpp/h, pc.cpp/h, README, rlg327.cpp, and utils.cpp/h
 Description: Built off of Jeremy Sheaffer's code from assignment 1.09. For this assignment we were able to add in our own functionality into the dungeon game. Added functionality for the player to know the remaining health of a monster it is currelty combating.
-	     The remaining health is displayed at the top along with the monster name and damage done. I then implemented a new terrian for Lava with a red "%". This lava terrian randomly generates throughout the dungeon and kills the player instantly if touched. 
+	     The remaining health is displayed at the top along with the monster name and damage done. I then implemented a new terrian for Lava with a red "%". This lava terrian randomly generates throughout the dungeon and kills the player instantly if touched.
+	     Added the functionality of displaying the player health near the lower right corner. The Health displays in the following color schemes: GREEN = Health >= 75%, Orangeish/Yellow = Health 50%-75%, RED= Health below 50%.
