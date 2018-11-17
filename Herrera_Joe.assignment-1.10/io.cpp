@@ -1595,6 +1595,12 @@ void io_handle_input(dungeon *d)
     case '.':
     case KEY_B2:
       fail_code = 0;
+      
+      //Increases the player health slowly, when idling 
+      if(d->PC->hp < d->PC->maxHp){
+	d->PC->hp = std::min((d->PC->hp + 3), d->PC->maxHp);
+      }
+
       break;
     case '>':
       fail_code = move_pc(d, '>');

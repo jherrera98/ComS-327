@@ -370,6 +370,7 @@ static void new_dungeon_level(dungeon *d, uint32_t dir)
 
 uint32_t move_pc(dungeon *d, uint32_t dir)
 {
+  
   pair_t next;
   uint32_t was_stairs = 0;
   const char *wallmsg[] = {
