@@ -590,6 +590,27 @@ static void place_lava(dungeon *d)
   } 
 }
 
+
+static void place_health(dungeon *d)
+{
+  pair_t p;
+
+  //random number of health terrain 
+  int32_t numberOfHealth= (rand() % 5) + 1;
+  int32_t i = 0;
+  while (i < numberOfHealth){
+
+    while ((p[dim_y] = rand_range(1, DUNGEON_Y - 2)) &&
+           (p[dim_x] = rand_range(1, DUNGEON_X - 2)) &&
+           ((mappair(p) < ter_floor)                 ||
+            (mappair(p) > ter_stairs)));
+    mappair(p) = ter_maxHealth;
+
+    i++;
+  } 
+}
+
+
 static int make_rooms(dungeon *d)
 {
   uint32_t i;
@@ -623,6 +644,7 @@ int gen_dungeon(dungeon *d)
   connect_rooms(d);
   place_stairs(d);
   place_lava(d);
+  place_health(d);
 
   return 0;
 }

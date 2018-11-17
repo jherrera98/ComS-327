@@ -61,5 +61,6 @@ void pc_observe_terrain(pc *p, dungeon *d);
 int32_t is_illuminated(pc *p, int16_t y, int16_t x);
 void pc_reset_visibility(pc *p);
 void pc_instant_kill(dungeon *d);
+void pc_max_health(dungeon *d);
 
 #endif

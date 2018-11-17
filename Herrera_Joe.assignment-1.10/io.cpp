@@ -269,6 +269,12 @@ static void io_redisplay_visible_monsters(dungeon *d, pair_t cursor)
                   d->PC->position[dim_x] + pos[dim_x], '%');
 	  attroff(COLOR_PAIR(COLOR_RED));
 	  break;
+	case ter_maxHealth:
+	  attron(COLOR_PAIR(COLOR_GREEN));
+	  mvaddch(d->PC->position[dim_y] + pos[dim_y] + 1,
+                  d->PC->position[dim_x] + pos[dim_x], '+');
+	  attroff(COLOR_PAIR(COLOR_GREEN));
+	  break;
         default:
  /* Use zero as an error symbol, since it stands out somewhat, and it's *
   * not otherwise used.                                                 */
@@ -398,6 +404,11 @@ void io_display(dungeon *d)
 	  attron(COLOR_PAIR(COLOR_RED));
 	  mvaddch(pos[dim_y] + 1, pos[dim_x], '%');//this is for lava
 	  attroff(COLOR_PAIR(COLOR_RED));
+	  break;	  
+	case ter_maxHealth:
+	  attron(COLOR_PAIR(COLOR_GREEN));
+	  mvaddch(pos[dim_y] + 1, pos[dim_x], '+');
+	  attroff(COLOR_PAIR(COLOR_GREEN));
 	  break;
         default:
  /* Use zero as an error symbol, since it stands out somewhat, and it's *
@@ -533,6 +544,11 @@ void io_display_no_fog(dungeon *d)
 	  attron(COLOR_PAIR(COLOR_RED));
 	  mvaddch(y+1, x, '%');//this is for lava
 	  attroff(COLOR_PAIR(COLOR_RED));
+	  break;
+	case ter_maxHealth:
+	  attron(COLOR_PAIR(COLOR_GREEN));
+	  mvaddch(y+1, x, '+');
+	  attroff(COLOR_PAIR(COLOR_GREEN));
 	  break;
         default:
  /* Use zero as an error symbol, since it stands out somewhat, and it's *
@@ -1601,6 +1617,12 @@ void io_handle_input(dungeon *d)
 	d->PC->hp = std::min((d->PC->hp + 3), d->PC->maxHp);
       }
 
+      
+      //The player continues getting full health if PC is over the safe zone
+      if(mapxy(d->PC->position[dim_x], d->PC->position[dim_y]) == ter_maxHealth){
+	pc_max_health(d);
+      }
+      
       break;
     case '>':
       fail_code = move_pc(d, '>');

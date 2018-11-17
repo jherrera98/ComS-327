@@ -466,3 +466,9 @@ void pc_instant_kill(dungeon *d){
   d->PC->alive = 0;
   d->PC->hp = 0;
 }
+
+void pc_max_health(dungeon *d){
+  io_queue_message("In a safe zone! Max Health");
+  io_queue_message("");
+  d->PC->hp = d->PC->maxHp;
+}

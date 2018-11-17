@@ -441,6 +441,11 @@ uint32_t move_pc(dungeon *d, uint32_t dir)
   if(mappair(next) == ter_lava){
     pc_instant_kill(d);
   }
+  //The get full health if this is stepped on, kind of like a safe zone
+  if(mappair(next) == ter_maxHealth){
+    pc_max_health(d);
+  }
+  
 
   if ((dir != '>') && (dir != '<') && (mappair(next) >= ter_floor)) {
     move_character(d, d->PC, next);
