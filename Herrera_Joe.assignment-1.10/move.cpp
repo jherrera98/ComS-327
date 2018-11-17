@@ -435,9 +435,11 @@ uint32_t move_pc(dungeon *d, uint32_t dir)
     return 0;
   }
 
-  //if(mappair(d->PC->position) == ter_lava){
-    //instantKill();
-    //}
+
+  ///The player dies if they step on lava
+  if(mappair(next) == ter_lava){
+    pc_instant_kill(d);
+  }
 
   if ((dir != '>') && (dir != '<') && (mappair(next) >= ter_floor)) {
     move_character(d, d->PC, next);

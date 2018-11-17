@@ -457,3 +457,11 @@ object *pc::from_pile(dungeon *d, pair_t pos)
 
   return o;
 }
+
+
+void pc_instant_kill(dungeon *d){
+  io_queue_message("You die from Lava");
+  io_queue_message("");
+  d->PC->alive = 0;
+  d->PC->hp = 0;
+}
